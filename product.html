@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Arngren Redesign — Product</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<header class="header">
+  <div class="wrap">
+    <div class="hbar">
+      <div class="brandBox">
+        <div class="logoBox" aria-hidden="true">
+          <svg width="44" height="44" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="3" width="38" height="38" rx="11" fill="#ffffff" stroke="rgba(0,0,0,.18)"/>
+            <path d="M12 26c6-10 14-14 20-8" fill="none" stroke="#1a4dd6" stroke-width="2.8" stroke-linecap="round"/>
+            <path d="M12 26c7 3 14 2 20-8" fill="none" stroke="#1f7a3a" stroke-width="2.8" stroke-linecap="round"/>
+            <circle cx="16" cy="18" r="2.6" fill="#b45309"/>
+          </svg>
+        </div>
+        <div class="brandText">
+          <b>ARNGREN.NET</b>
+          <small>product page</small>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="index.html">HOME</a>
+        <a href="index.html#browse">CATALOG</a>
+        <a href="cart.html">CART</a>
+      </nav>
+
+      <div class="actions">
+        <button class="iconbtn" id="wishBtn" title="Wishlist">☆<span class="badge" id="wishCount">0</span></button>
+        <a class="iconbtn" href="cart.html" title="Cart">🛒<span class="badge" id="cartCount">0</span></a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="wrap" style="padding:14px 0 34px;">
+  <div class="pageCard">
+    <div class="crumbs"><a href="index.html">Home</a> › <a href="index.html#browse">Catalog</a> › <span id="crumbName">Product</span></div>
+    <div style="height:12px"></div>
+
+    <div class="twoCol">
+      <div class="card" style="box-shadow:none">
+        <div class="img" id="pImg"></div>
+      </div>
+
+      <div class="pageCard" style="box-shadow:none;border:none;background:transparent;padding:0">
+        <h1 style="margin:0 0 6px;font-size:22px" id="pName"></h1>
+        <div class="rowLine">
+          <div class="price" style="font-size:18px" id="pPrice">$0</div>
+          <div class="pill" id="pStock">—</div>
+        </div>
+
+        <div style="height:10px"></div>
+        <div style="color:var(--muted);font-weight:600;font-size:12px" id="pMeta"></div>
+        <div style="height:10px"></div>
+
+        <table class="table">
+          <tr><td>Power</td><td id="pPower">—</td></tr>
+          <tr><td>Scale</td><td id="pScale">—</td></tr>
+          <tr><td>Motor</td><td id="pMotor">—</td></tr>
+          <tr><td>Battery</td><td id="pBattery">—</td></tr>
+        </table>
+
+        <div style="height:10px"></div>
+        <div style="color:var(--muted);font-weight:500;font-size:12px;line-height:1.5" id="pDesc"></div>
+
+        <div class="cbtns" style="margin-top:12px">
+          <button class="cbtn" id="wishToggle">☆ Wishlist</button>
+          <button class="cbtn good" id="addBtn">Add to Cart</button>
+        </div>
+        <div class="cbtns">
+          <a class="cbtn primary" href="cart.html">Go to Checkout</a>
+          <a class="cbtn" href="index.html#browse">Back to Catalog</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="toast" id="toast">
+  <b id="toastTitle"></b>
+  <small id="toastText"></small>
+  <div class="trow">
+    <span style="font-size:12px;color:var(--muted);font-weight:500;">Next: view cart</span>
+    <a class="tbtn" href="cart.html" style="text-decoration:none;color:inherit;">Open cart</a>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script>
+  const A = window.ArngrenApp;
+  A.syncHeaderCounts();
+
+  const params = new URLSearchParams(location.search);
+  const id = params.get("id");
+  const p = A.getProduct(id);
+
+  const el = (x)=>document.getElementById(x);
+
+  document.getElementById("wishBtn").addEventListener("click", ()=>{
+    A.showToast("Wishlist", "Use the Wishlist button below to save this item.");
+  });
+
+  if(!p){
+    el("pName").textContent = "Product not found";
+    el("pDesc").textContent = "Go back to catalog.";
+    el("pStock").textContent = "—";
+  } else {
+    el("crumbName").textContent = p.name;
+    if(p.img){
+      el("pImg").innerHTML = `<img src="${p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;border-radius:12px;" onerror="this.src='data:image/svg+xml,${encodeURIComponent(A.thumbSVG(p.kind, p.accent).replace(/"/g, "'"))}'"/>`;
+    } else {
+      el("pImg").innerHTML = A.thumbSVG(p.kind, p.accent);
+    }
+    el("pName").textContent = p.name;
+    el("pPrice").textContent = `$${p.price}`;
+    el("pStock").textContent = p.stock ? "In stock" : "Out of stock";
+    el("pMeta").textContent = `${p.cat} • ${p.power} ${p.clearance ? "• Clearance" : ""}`;
+    el("pPower").textContent = p.power;
+    el("pScale").textContent = p.scale;
+    el("pMotor").textContent = p.motor;
+    el("pBattery").textContent = p.battery;
+    el("pDesc").textContent = p.desc;
+
+    const wishToggle = el("wishToggle");
+    wishToggle.addEventListener("click", ()=>{
+      const on = A.toggleWish(p.id);
+      wishToggle.textContent = on ? "★ Wishlisted" : "☆ Wishlist";
+      A.showToast("Wishlist updated", on ? "Saved for later." : "Removed.");
+    });
+
+    const addBtn = el("addBtn");
+    addBtn.disabled = !p.stock;
+    if(!p.stock) addBtn.classList.add("disabled");
+    addBtn.addEventListener("click", ()=>{
+      const ok = A.addToCart(p.id, 1);
+      if(ok) A.showToast("Added to cart", "Item added. Ready to checkout.");
+    });
+  }
+</script>
+</body>
+</html>

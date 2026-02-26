@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arngren Redesign - Project Documentation</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    header {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.5em;
+      color: #1a4dd6;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.1em;
+      color: #666;
+      margin-bottom: 10px;
+    }
+    header .subtitle {
+      font-size: 0.95em;
+      color: #999;
+      font-style: italic;
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    
+    @media (max-width: 768px) {
+      .grid { grid-template-columns: 1fr; }
+      header h1 { font-size: 1.8em; }
+    }
+    
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    }
+    
+    .card-header {
+      padding: 25px;
+      background: linear-gradient(135deg, #1a4dd6 0%, #1f7a3a 100%);
+      color: white;
+      border-bottom: 4px solid #b45309;
+    }
+    
+    .card-header h2 {
+      font-size: 1.6em;
+      margin-bottom: 8px;
+    }
+    
+    .card-header p {
+      font-size: 0.95em;
+      opacity: 0.95;
+    }
+    
+    .card-body {
+      padding: 25px;
+    }
+    
+    .card-body ul {
+      list-style: none;
+      margin-bottom: 15px;
+    }
+    
+    .card-body li {
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+    }
+    
+    .card-body li:last-child {
+      border-bottom: none;
+    }
+    
+    .card-body li::before {
+      content: '→';
+      color: #1a4dd6;
+      font-weight: bold;
+      margin-right: 12px;
+      font-size: 1.1em;
+    }
+    
+    .card-footer {
+      padding: 0 25px 25px;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #1a4dd6 0%, #1f7a3a 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: opacity 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    
+    .btn:hover {
+      opacity: 0.9;
+    }
+    
+    .btn-secondary {
+      background: #f0f0f0;
+      color: #1a4dd6;
+      border: 2px solid #1a4dd6;
+    }
+    
+    .btn-secondary:hover {
+      background: #e8e8e8;
+    }
+    
+    .wide {
+      grid-column: 1 / -1;
+    }
+    
+    .flex-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .stat-box {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      border-left: 4px solid #1a4dd6;
+      margin-bottom: 15px;
+    }
+    
+    .stat-box strong {
+      color: #1a4dd6;
+      display: block;
+      font-size: 1.1em;
+      margin-bottom: 5px;
+    }
+    
+    .stat-box span {
+      color: #666;
+      font-size: 0.95em;
+    }
+    
+    footer {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      margin-top: 30px;
+    }
+    
+    .team-info {
+      background: #f0f4ff;
+      padding: 20px;
+      border-radius: 8px;
+      border-left: 4px solid #1a4dd6;
+      margin-bottom: 20px;
+    }
+    
+    .team-info strong {
+      color: #1a4dd6;
+    }
+    
+    .emoji-icon {
+      font-size: 2em;
+      margin-right: 10px;
+    }
+    
+    .feature-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 15px;
+    }
+    
+    .feature-item {
+      background: #f9f9f9;
+      padding: 12px;
+      border-radius: 6px;
+      border-left: 3px solid #1f7a3a;
+    }
+    
+    .feature-item strong {
+      color: #1f7a3a;
+      display: block;
+      margin-bottom: 4px;
+    }
+    
+    .feature-item span {
+      font-size: 0.9em;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>🛍️ ARNGREN REDESIGN PROJECT</h1>
+  <p>Mock-up Design & User Flow Documentation</p>
+  <p class="subtitle">CS 3215 - Human Computer Interaction</p>
+  
+  <div class="team-info" style="margin-top: 20px;">
+    <strong>👥 Project Group #6</strong><br>
+    BACSAIN, Jave A. • BAGAPORO, John Louie B. • ORTINERO, Frederick D. • PRESTADO, Marc Justin N.<br>
+    <strong>Class:</strong> BSCS-3A
+  </div>
+</header>
+
+<div class="grid">
+
+<!-- PROJECT OVERVIEW CARD -->
+<div class="card">
+  <div class="card-header">
+    <h2>📋 Project Overview</h2>
+    <p>System Analysis & Design Rationale</p>
+  </div>
+  <div class="card-body">
+    <p style="margin-bottom: 15px; color: #666;">Comprehensive documentation of the Arngren redesign project, including importance, problems solved, target users, and competitive advantages.</p>
+    
+    <div class="stat-box">
+      <strong>Main Objective:</strong>
+      <span>Transform a cluttered, unorganized e-commerce interface into a clean, user-centered platform with improved navigation, mobile responsiveness, and secure checkout.</span>
+    </div>
+    
+    <p style="color: #666; font-size: 0.95em; line-height: 1.6;">
+      <strong>Includes:</strong>
+      <br>✓ System importance & impact analysis
+      <br>✓ 4 key problems being addressed
+      <br>✓ 4 target user personas & usage patterns
+      <br>✓ Expected user feelings & experiences
+      <br>✓ Advantages vs. disadvantages comparison
+    </p>
+  </div>
+  <div class="card-footer">
+    <a href="mockup-overview.html#top" class="btn" target="_blank">View Overview</a>
+  </div>
+</div>
+
+<!-- MOCKUP DESIGNS CARD -->
+<div class="card">
+  <div class="card-header">
+    <h2>🎨 Mockup Designs</h2>
+    <p>Visual Interface Mockups</p>
+  </div>
+  <div class="card-body">
+    <p style="margin-bottom: 15px; color: #666;">High-fidelity wireframes with visual design, colors, and typography showcasing 4 main pages of the redesigned system.</p>
+    
+    <ul>
+      <li><strong>Homepage</strong> - Hero section, value proposition, navigation</li>
+      <li><strong>Catalog</strong> - Filters, grid layout, product cards</li>
+      <li><strong>Product Detail</strong> - Specs, pricing, action buttons</li>
+      <li><strong>Shopping Cart</strong> - Items, order summary, shipping calc</li>
+    </ul>
+    
+    <div style="background: #f0f0f0; padding: 15px; border-radius: 6px; margin-top: 15px;">
+      <strong style="color: #1a4dd6;">Design System:</strong><br>
+      <span style="font-size: 0.9em; color: #666;">
+        Colors designed to match original Arngren branding while improving readability. Responsive layout works on desktop, tablet, and mobile.
+      </span>
+    </div>
+  </div>
+  <div class="card-footer">
+    <a href="mockup-overview.html#mockup-designs" class="btn" target="_blank">View Mockups</a>
+  </div>
+</div>
+
+<!-- USER FLOWS CARD -->
+<div class="card">
+  <div class="card-header">
+    <h2>🔄 User Flows & UX Design</h2>
+    <p>Complete Journey Maps & Interaction Flows</p>
+  </div>
+  <div class="card-body">
+    <p style="margin-bottom: 15px; color: #666;">Detailed step-by-step user flows showing how different user types interact with the system from start to completion.</p>
+    
+    <ul>
+      <li><strong>Flow 1:</strong> Direct Search to Rapid Purchase (2-3 min)</li>
+      <li><strong>Flow 2:</strong> Category Browsing & Comparison (5-10 min)</li>
+      <li><strong>Flow 3:</strong> Cart Management & Shipping (3-5 min)</li>
+      <li><strong>Flow 4:</strong> Wishlist Management (2-3 min)</li>
+    </ul>
+    
+    <p style="background: #e8f5e9; padding: 12px; border-radius: 6px; margin-top: 15px; font-size: 0.9em; color: #1f7a3a;">
+      <strong>19 detailed steps per flow</strong> showing each action, system response, and user feedback with visual journey diagrams.
+    </p>
+  </div>
+  <div class="card-footer">
+    <a href="user-flows.html" class="btn" target="_blank">View User Flows</a>
+  </div>
+</div>
+
+<!-- KEY FEATURES CARD -->
+<div class="card">
+  <div class="card-header">
+    <h2>✨ Key Features</h2>
+    <p>Core Improvements & Functionalities</p>
+  </div>
+  <div class="card-body">
+    <div class="feature-list">
+      <div class="feature-item">
+        <strong>🔍 Smart Search</strong>
+        <span>Autocomplete with 6 suggestions</span>
+      </div>
+      <div class="feature-item">
+        <strong>🎛️ Advanced Filters</strong>
+        <span>Price, power type, stock, clearance</span>
+      </div>
+      <div class="feature-item">
+        <strong>📊 Quick View</strong>
+        <span>Compare specs side-by-side</span>
+      </div>
+      <div class="feature-item">
+        <strong>❤️ Wishlist</strong>
+        <span>Save items for later purchase</span>
+      </div>
+      <div class="feature-item">
+        <strong>🛒 Smart Cart</strong>
+        <span>Quantity controls, real-time updates</span>
+      </div>
+      <div class="feature-item">
+        <strong>📦 Shipping Calc</strong>
+        <span>ZIP-based cost & free shipping tracker</span>
+      </div>
+      <div class="feature-item">
+        <strong>💳 Secure Checkout</strong>
+        <span>Stripe/PayPal integration</span>
+      </div>
+      <div class="feature-item">
+        <strong>📱 Responsive</strong>
+        <span>Perfect on phone, tablet, desktop</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM SOLUTIONS CARD -->
+<div class="card">
+  <div class="card-header">
+    <h2>🎯 Problems & Solutions</h2>
+    <p>How Redesign Addresses Current Issues</p>
+  </div>
+  <div class="card-body">
+    <div class="stat-box" style="border-left-color: #b45309;">
+      <strong style="color: #b45309;">Problem 1: Cognitive Overload</strong>
+      <span>Thousands of items on single page → Solution: Categorized browsing + filters for manageable results</span>
+    </div>
+    
+    <div class="stat-box" style="border-left-color: #b45309;">
+      <strong style="color: #b45309;">Problem 2: No Mobile Support</strong>
+      <span>Static layout breaks on phones → Solution: Fully responsive design (1-3 column layout)</span>
+    </div>
+    
+    <div class="stat-box" style="border-left-color: #b45309;">
+      <strong style="color: #b45309;">Problem 3: Unsafe Checkout</strong>
+      <span>Manual forms → Solution: Secure payment gateway (Stripe/PayPal) + transparent pricing</span>
+    </div>
+    
+    <div class="stat-box" style="border-left-color: #b45309;">
+      <strong style="color: #b45309;">Problem 4: No Comparison Tools</strong>
+      <span>Can't compare specs easily → Solution: Quick View modal + detailed product pages</span>
+    </div>
+  </div>
+</div>
+
+<!-- TARGET USERS CARD -->
+<div class="card">
+  <div class="card-header">
+    <h2>👥 Target User Personas</h2>
+    <p>4 Main User Types & Their Behaviors</p>
+  </div>
+  <div class="card-body">
+    <div class="stat-box">
+      <strong>👔 Casual Buyer</strong>
+      <span>General shoppers accustomed to modern e-commerce (Amazon, Shopee). Want quick, easy purchases.</span>
+    </div>
+    
+    <div class="stat-box">
+      <strong>🔧 Techie/Hobbyist</strong>
+      <span>Specialized equipment seekers. Want detailed specs, filters, and product comparison tools.</span>
+    </div>
+    
+    <div class="stat-box">
+      <strong>📱 Mobile User</strong>
+      <span>Smartphone shoppers. Need responsive design without horizontal scrolling.</span>
+    </div>
+    
+    <div class="stat-box">
+      <strong>🆕 First-Time Visitor</strong>
+      <span>Skeptical about site reputation. Need professional interface to build trust for payment.</span>
+    </div>
+  </div>
+</div>
+
+<!-- IMPLEMENTATION STATS CARD -->
+<div class="card">
+  <div class="card-header">
+    <h2>📈 Expected Improvements</h2>
+    <p>Measurable Metrics & Performance Gains</p>
+  </div>
+  <div class="card-body">
+    <table style="width: 100%; border-collapse: collapse; font-size: 0.9em;">
+      <tr style="border-bottom: 2px solid #ddd;">
+        <td style="padding: 10px; font-weight: bold; color: #1a4dd6;">Metric</td>
+        <td style="padding: 10px; font-weight: bold; color: #1a4dd6;">Before</td>
+        <td style="padding: 10px; font-weight: bold; color: #1a4dd6;">After</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #eee;">
+        <td style="padding: 10px;">Steps to Purchase</td>
+        <td style="padding: 10px;">15-20 clicks</td>
+        <td style="padding: 10px; color: #1f7a3a; font-weight: bold;">8-10 clicks ↓50%</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #eee;">
+        <td style="padding: 10px;">Avg Time per Purchase</td>
+        <td style="padding: 10px;">8-12 min</td>
+        <td style="padding: 10px; color: #1f7a3a; font-weight: bold;">2-3 min ↓75%</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #eee;">
+        <td style="padding: 10px;">Mobile Support</td>
+        <td style="padding: 10px;">Broken</td>
+        <td style="padding: 10px; color: #1f7a3a; font-weight: bold;">Full responsive ✓</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #eee;">
+        <td style="padding: 10px;">Product Discovery</td>
+        <td style="padding: 10px;">Manual scrolling</td>
+        <td style="padding: 10px; color: #1f7a3a; font-weight: bold;">Search + filters ✓</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #eee;">
+        <td style="padding: 10px;">Shipping Transparency</td>
+        <td style="padding: 10px;">Contact support</td>
+        <td style="padding: 10px; color: #1f7a3a; font-weight: bold;">Real-time calc ✓</td>
+      </tr>
+      <tr>
+        <td style="padding: 10px;">Payment Security</td>
+        <td style="padding: 10px;">Manual forms</td>
+        <td style="padding: 10px; color: #1f7a3a; font-weight: bold;">Stripe/PayPal ✓</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+</div>
+
+<!-- WORKING PROTOTYPE CARD - FULL WIDTH -->
+<div class="card" style="margin-top: 20px;">
+  <div class="card-header">
+    <h2>💻 Live Working Prototype</h2>
+    <p>Functional HTML/CSS/JS Implementation</p>
+  </div>
+  <div class="card-body">
+    <p style="margin-bottom: 20px; color: #666;">
+      A fully functional prototype has been implemented with the following technologies:
+    </p>
+    
+    <ul style="margin-left: 20px; margin-bottom: 20px;">
+      <li><strong>Frontend:</strong> HTML5, CSS3, JavaScript (Vanilla)</li>
+      <li><strong>Storage:</strong> LocalStorage (offline capability)</li>
+      <li><strong>Data:</strong> 10 demo products with mock catalog</li>
+      <li><strong>Features:</strong> Search, filters, cart, wishlist, shipping calc</li>
+    </ul>
+    
+    <div style="background: #e3f2fd; padding: 15px; border-radius: 6px; margin-bottom: 15px;">
+      <strong style="color: #1a4dd6;">Available Files:</strong>
+      <ul style="margin-top: 8px; margin-left: 20px;">
+        <li>index.html - Homepage with hero section & catalog</li>
+        <li>product.html - Product detail page</li>
+        <li>cart.html - Shopping cart & checkout</li>
+        <li>styles.css - Responsive design styling</li>
+        <li>app.js - Application logic & data management</li>
+      </ul>
+    </div>
+    
+    <div class="flex-buttons">
+      <a href="index.html" class="btn" target="_blank" style="flex: 1; text-align: center;">Open Live Demo</a>
+      <a href="mockup-overview.html" class="btn btn-secondary" target="_blank" style="flex: 1; text-align: center;">View Documentation</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p style="margin-bottom: 10px;">
+    <strong>Arngren Redesign Project</strong> — CS 3215 Human Computer Interaction
+  </p>
+  <p style="font-size: 0.95em; opacity: 0.9;">
+    Mock-up Design &amp; User Flow Documentation | Generated February 26, 2026
+  </p>
+</footer>
+
+</div>
+</body>
+</html>

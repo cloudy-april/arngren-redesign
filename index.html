@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Arngren Redesign — Home</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<header class="header">
+  <div class="wrap">
+    <div class="hbar">
+      <div class="brandBox">
+        <div class="logoBox" aria-hidden="true">
+          <svg width="44" height="44" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="3" width="38" height="38" rx="11" fill="#ffffff" stroke="rgba(0,0,0,.18)"/>
+            <path d="M12 26c6-10 14-14 20-8" fill="none" stroke="#1a4dd6" stroke-width="2.8" stroke-linecap="round"/>
+            <path d="M12 26c7 3 14 2 20-8" fill="none" stroke="#1f7a3a" stroke-width="2.8" stroke-linecap="round"/>
+            <circle cx="16" cy="18" r="2.6" fill="#b45309"/>
+          </svg>
+        </div>
+        <div class="brandText">
+          <b>ARNGREN.NET</b>
+          <small>improved catalog • offline</small>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="index.html">HOME</a>
+        <a href="#" class="navCat" data-cat="Drones">DRONES</a>
+        <a href="#" class="navCat" data-cat="Electric Vehicles">ELECTRIC VEHICLES</a>
+        <a href="#" class="navCat" data-cat="RC & Toys">RC & TOYS</a>
+        <a href="#" class="navCat" data-cat="Tools">TOOLS</a>
+        <a href="#" class="navCat" data-cat="Cameras">CAMERAS</a>
+        <a href="#" class="navClear">CLEARANCE</a>
+      </nav>
+
+      <div class="search">
+        <span class="icon">⌕</span>
+        <input id="q" placeholder="Search products…" autocomplete="off"/>
+        <span class="kbd">Ctrl K</span>
+        <div id="ac" class="ac"></div>
+      </div>
+
+      <div class="actions">
+        <button class="iconbtn" id="wishBtn" title="Wishlist">☆<span class="badge" id="wishCount">0</span></button>
+        <a class="iconbtn" href="cart.html" title="Cart">🛒<span class="badge" id="cartCount">0</span></a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="heroSimple">
+      <h1>ARNGREN.NET</h1>
+      <p>Search our catalog</p>
+      <div class="searchMainWrapper">
+        <div class="searchMain">
+          <input type="text" id="mainSearch" placeholder="Search for products, categories, or brands..." autocomplete="off"/>
+          <button class="btn primary searchBtn">Search</button>
+        </div>
+        <div id="mainAC" class="mainAC"></div>
+      </div>
+      <div class="quickLinks">
+        <a href="#" class="quickLink navCat" data-cat="Drones">Drones</a>
+        <a href="#" class="quickLink navCat" data-cat="Electric Vehicles">Electric Vehicles</a>
+        <a href="#" class="quickLink navCat" data-cat="RC & Toys">RC & Toys</a>
+        <a href="#" class="quickLink navCat" data-cat="Tools">Tools</a>
+        <a href="#" class="quickLink navCat" data-cat="Cameras">Cameras</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="browse" style="display:none">
+  <div class="main">
+    <aside class="panel">
+      <div class="ph">
+        <b>Catalog Filters</b>
+        <span id="resultCount" style="font-size:12px;color:var(--muted);font-weight:600;">0 results</span>
+      </div>
+      <div class="pc">
+        <div class="catalogLinks">
+          <b>POPULAR LINKS</b>
+          <div class="links">
+            <a href="#" class="navCat" data-cat="Drones">• GPS DRONES</a>
+            <a href="#" class="navCat" data-cat="RC & Toys">• RC TANKS</a>
+            <a href="#" class="navCat" data-cat="Electric Vehicles">• E-BIKES</a>
+            <a href="#" class="navCat" data-cat="Tools">• SOLDER TOOLS</a>
+            <a href="#" class="navCat" data-cat="Cameras">• ACTION CAMS</a>
+            <a href="#" class="navClear">• CHEAP DEALS</a>
+          </div>
+        </div>
+
+        <div class="filterGroup">
+          <label>Category</label>
+          <div class="chips" id="catChips"></div>
+        </div>
+
+        <div class="filterGroup">
+          <label>Power Type</label>
+          <div class="chips" id="powerChips"></div>
+        </div>
+
+        <div class="filterGroup">
+          <label>Price (max)</label>
+          <div class="rangeRow">
+            <input id="priceMax" type="range" min="50" max="2000" step="50" value="2000"/>
+            <div class="rangePill" id="priceLabel">≤ $2000</div>
+          </div>
+        </div>
+
+        <div class="filterGroup">
+          <label>Quick Filters</label>
+          <div class="chips">
+            <div class="chip" id="onlyInStock">In-stock only</div>
+            <div class="chip" id="onlyClearance">Clearance</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main>
+      <div class="topRow">
+        <div class="titleRow">
+          <div class="crumbs">Home › <span id="crumbCat">All</span></div>
+          <b>Catalog</b>
+          <small>Click “Open Page” for full details.</small>
+        </div>
+
+        <div class="sortRow" style="display:flex;gap:10px;align-items:center">
+          <span style="font-size:11px;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.5px;">Sort</span>
+          <select id="sort">
+            <option value="relevance">Best match</option>
+            <option value="priceAsc">Price: low → high</option>
+            <option value="priceDesc">Price: high → low</option>
+            <option value="newest">Newest</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid" id="grid"></div>
+    </main>
+  </div>
+</section>
+
+<!-- Quick View Modal -->
+<div class="modal" id="quickViewModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Quick View</h2>
+      <button class="modal-close" onclick="document.getElementById('quickViewModal').classList.remove('show')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-img" id="qvImg"></div>
+      <div>
+        <h3 id="qvName" style="margin:0 0 8px;color:var(--text)"></h3>
+        <div class="modal-price" id="qvPrice"></div>
+        <div id="qvStock" style="font-size:12px;color:var(--muted);margin-bottom:12px;font-weight:600;"></div>
+        <div class="modal-specs">
+          <table>
+            <tr><td>Power</td><td id="qvPower">—</td></tr>
+            <tr><td>Scale</td><td id="qvScale">—</td></tr>
+            <tr><td>Motor</td><td id="qvMotor">—</td></tr>
+            <tr><td>Battery</td><td id="qvBattery">—</td></tr>
+          </table>
+        </div>
+        <div class="modal-buttons">
+          <a class="cbtn primary" id="qvDetail" href="#">View Details</a>
+          <button class="cbtn good" id="qvAdd">+ Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <b id="toastTitle"></b>
+  <small id="toastText"></small>
+  <div class="trow">
+    <span style="font-size:12px;color:var(--muted);font-weight:500;">Next: view cart</span>
+    <a class="tbtn" id="toastOpenCart" href="cart.html" style="text-decoration:none;color:inherit;">Open cart</a>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script>
+  const A = window.ArngrenApp;
+  A.syncHeaderCounts();
+
+  const els = {
+    q: document.getElementById("q"),
+    ac: document.getElementById("ac"),
+    grid: document.getElementById("grid"),
+    resultCount: document.getElementById("resultCount"),
+    priceMax: document.getElementById("priceMax"),
+    priceLabel: document.getElementById("priceLabel"),
+    onlyInStock: document.getElementById("onlyInStock"),
+    onlyClearance: document.getElementById("onlyClearance"),
+    sort: document.getElementById("sort"),
+    crumbCat: document.getElementById("crumbCat"),
+    catChips: document.getElementById("catChips"),
+    powerChips: document.getElementById("powerChips"),
+    jumpBrowse: document.getElementById("jumpBrowse"),
+    jumpCart: document.getElementById("jumpCart"),
+  };
+
+  const state = {
+    cat: "All",
+    power: new Set(),
+    maxPrice: 2000,
+    inStockOnly: false,
+    clearanceOnly: false,
+    sort: "relevance",
+    q: ""
+  };
+
+  function makeChip(label, active){
+    const d = document.createElement("div");
+    d.className = "chip" + (active ? " on" : "");
+    d.textContent = label;
+    return d;
+  }
+
+  function categories(){
+    const set = new Set(A.PRODUCTS.map(p=>p.cat));
+    return ["All", ...set];
+  }
+  function powers(){
+    return [...new Set(A.PRODUCTS.map(p=>p.power))];
+  }
+
+  function setCategory(cat){
+    state.cat = cat;
+    els.crumbCat.textContent = cat;
+    [...els.catChips.children].forEach(x=>x.classList.toggle("on", x.textContent===cat));
+    render();
+  }
+
+  // build chips
+  categories().forEach((c,i)=>{
+    const el = makeChip(c, i===0);
+    el.addEventListener("click", ()=> setCategory(c));
+    els.catChips.appendChild(el);
+  });
+
+  powers().forEach(pt=>{
+    const el = makeChip(pt, false);
+    el.addEventListener("click", ()=>{
+      if(state.power.has(pt)){ state.power.delete(pt); el.classList.remove("on"); }
+      else { state.power.add(pt); el.classList.add("on"); }
+      render();
+    });
+    els.powerChips.appendChild(el);
+  });
+
+  // nav actions
+  document.querySelectorAll(".navCat").forEach(a=>{
+    a.addEventListener("click", (e)=>{
+      e.preventDefault();
+      state.clearanceOnly = false;
+      els.onlyClearance.classList.remove("on");
+      setCategory(a.dataset.cat);
+      document.getElementById("browse").style.display = "block";
+      setTimeout(()=> document.getElementById("browse").scrollIntoView({behavior:"smooth"}), 100);
+    });
+  });
+  document.querySelectorAll(".navClear").forEach(a=>{
+    a.addEventListener("click", (e)=>{
+      e.preventDefault();
+      state.clearanceOnly = true;
+      els.onlyClearance.classList.add("on");
+      setCategory("All");
+      document.getElementById("browse").style.display = "block";
+      setTimeout(()=> document.getElementById("browse").scrollIntoView({behavior:"smooth"}), 100);
+    });
+  });
+
+  // filters
+  els.priceMax.addEventListener("input", ()=>{
+    state.maxPrice = Number(els.priceMax.value);
+    els.priceLabel.textContent = `≤ $${state.maxPrice}`;
+    render();
+  });
+  els.onlyInStock.addEventListener("click", ()=>{
+    state.inStockOnly = !state.inStockOnly;
+    els.onlyInStock.classList.toggle("on", state.inStockOnly);
+    render();
+  });
+  els.onlyClearance.addEventListener("click", ()=>{
+    state.clearanceOnly = !state.clearanceOnly;
+    els.onlyClearance.classList.toggle("on", state.clearanceOnly);
+    render();
+  });
+  els.sort.addEventListener("change", ()=>{ state.sort = els.sort.value; render(); });
+
+  // search autocomplete
+  function openAC(items){
+    els.ac.innerHTML = "";
+    if(!items.length){ els.ac.classList.remove("show"); return; }
+    items.slice(0,6).forEach(p=>{
+      const row = document.createElement("div");
+      row.className = "row";
+      row.innerHTML = `<div><b>${p.name}</b><div><small>${p.cat} • ${p.power}</small></div></div><div class="tag">$${p.price}</div>`;
+      row.addEventListener("click", ()=>{
+        window.location.href = `product.html?id=${p.id}`;
+      });
+      els.ac.appendChild(row);
+    });
+    els.ac.classList.add("show");
+  }
+
+  els.q.addEventListener("input", ()=>{
+    state.q = els.q.value.trim();
+    const q = state.q.toLowerCase();
+    if(!q){ els.ac.classList.remove("show"); render(); return; }
+    openAC(A.PRODUCTS.filter(p=>p.name.toLowerCase().includes(q)));
+    render();
+  });
+
+  window.addEventListener("keydown", (e)=>{
+    if((e.ctrlKey || e.metaKey) && e.key.toLowerCase()==="k"){ e.preventDefault(); els.q.focus(); }
+    if(e.key==="Escape"){ els.ac.classList.remove("show"); }
+  });
+
+  document.addEventListener("click", (e)=>{
+    if(!els.ac.contains(e.target) && e.target !== els.q) els.ac.classList.remove("show");
+  });
+
+  // wishlist button just info toast
+  document.getElementById("wishBtn").addEventListener("click", ()=>{
+    A.showToast("Wishlist", "Use the Wishlist buttons on products to save items.");
+  });
+
+  function openQuickView(product){
+    const el = (x)=>document.getElementById(x);
+    const p = product;
+    const modal = document.getElementById("quickViewModal");
+    
+    if(p.img){
+      el("qvImg").innerHTML = `<img src="${p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;"/>`;
+    } else {
+      el("qvImg").innerHTML = A.thumbSVG(p.kind, p.accent);
+    }
+    
+    el("qvName").textContent = p.name;
+    el("qvPrice").textContent = `$${p.price}`;
+    el("qvStock").textContent = p.stock ? "✓ In stock" : "⚠ Out of stock";
+    el("qvPower").textContent = p.power;
+    el("qvScale").textContent = p.scale;
+    el("qvMotor").textContent = p.motor;
+    el("qvBattery").textContent = p.battery;
+    el("qvDetail").href = `product.html?id=${p.id}`;
+    
+    const qvAdd = el("qvAdd");
+    qvAdd.disabled = !p.stock;
+    qvAdd.onclick = ()=>{
+      const ok = A.addToCart(p.id, 1);
+      if(ok) {
+        A.showToast("Added to cart", "View cart to checkout");
+        modal.classList.remove("show");
+      }
+    };
+    
+    modal.classList.add("show");
+  }
+
+  function filterAndSort(){
+    const q = state.q.toLowerCase();
+    let list = A.PRODUCTS.filter(p=>{
+      if(state.cat !== "All" && p.cat !== state.cat) return false;
+      if(state.power.size && !state.power.has(p.power)) return false;
+      if(p.price > state.maxPrice) return false;
+      if(state.inStockOnly && !p.stock) return false;
+      if(state.clearanceOnly && !p.clearance) return false;
+      if(q && !p.name.toLowerCase().includes(q)) return false;
+      return true;
+    });
+
+    if(state.sort==="priceAsc") list.sort((a,b)=>a.price-b.price);
+    else if(state.sort==="priceDesc") list.sort((a,b)=>b.price-a.price);
+    else if(state.sort==="newest") list.sort((a,b)=>b.newest-a.newest);
+    else list.sort((a,b)=> (Number(b.stock)-Number(a.stock)) || (b.newest-a.newest));
+
+    return list;
+  }
+
+  function render(){
+    const list = filterAndSort();
+    els.resultCount.textContent = `${list.length} results`;
+    els.grid.innerHTML = "";
+
+    list.forEach(p=>{
+      const card = document.createElement("div");
+      card.className = "card";
+      const imgHtml = p.img ? `<img src="${p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;"/>` : A.thumbSVG(p.kind, p.accent);
+      card.innerHTML = `
+        <div class="img">${imgHtml}</div>
+        <div class="cbody">
+          <div class="cname">${p.name}</div>
+          <div class="cmeta">
+            <div class="price">$${p.price}</div>
+            <div style="font-size:11px;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.5px;">${p.cat}</div>
+          </div>
+          <div class="spec">Power: ${p.power} • ${p.stock ? "In stock" : "Out of stock"} ${p.clearance ? "• Clearance" : ""}</div>
+
+          <div class="cbtns">
+            <button class="cbtn" data-qv="${p.id}" style="background:rgba(26,77,214,.1);color:var(--brand);border:1px solid rgba(26,77,214,.3);">👁 View</button>
+            <button class="cbtn good ${p.stock ? "" : "disabled"}" ${p.stock ? "" : "disabled"} data-add="${p.id}">+ Add</button>
+          </div>
+          <div class="cbtns">
+            <button class="cbtn" data-wish="${p.id}">☆ Wishlist</button>
+            <a class="cbtn" href="product.html?id=${p.id}">Details</a>
+          </div>
+        </div>
+      `;
+
+      card.querySelector("[data-add]")?.addEventListener("click", ()=>{
+        const ok = A.addToCart(p.id, 1);
+        if(ok) A.showToast("Added to cart", "Item added. You can checkout anytime.");
+      });
+
+      card.querySelector("[data-qv]")?.addEventListener("click", ()=>{
+        openQuickView(p);
+      });
+
+      card.querySelector("[data-wish]").addEventListener("click", (e)=>{
+        const on = A.toggleWish(p.id);
+        e.target.textContent = on ? "★ Wishlisted" : "☆ Wishlist";
+        A.showToast("Wishlist updated", on ? "Saved for later." : "Removed.");
+      });
+
+      els.grid.appendChild(card);
+    });
+
+    A.syncHeaderCounts();
+  }
+
+  els.jumpBrowse.addEventListener("click", ()=> document.getElementById("browse").scrollIntoView({behavior:"smooth"}));
+  els.jumpCart.addEventListener("click", ()=> window.location.href = "cart.html");
+
+  // Main search functionality
+  const mainSearch = document.getElementById("mainSearch");
+  const searchBtn = document.querySelector(".searchBtn");
+  const mainAC = document.getElementById("mainAC");
+  
+  function showBrowseSection(){
+    document.getElementById("browse").style.display = "block";
+    setTimeout(()=> document.getElementById("browse").scrollIntoView({behavior:"smooth"}), 100);
+  }
+  
+  function openMainAC(items){
+    mainAC.innerHTML = "";
+    if(!items.length){ mainAC.classList.remove("show"); return; }
+    items.slice(0,6).forEach(p=>{
+      const row = document.createElement("div");
+      row.className = "row";
+      row.innerHTML = `<div><b>${p.name}</b><small>${p.cat} • ${p.power} • $${p.price}</small></div><div class="tag">View</div>`;
+      row.addEventListener("click", ()=>{
+        window.location.href = `product.html?id=${p.id}`;
+      });
+      mainAC.appendChild(row);
+    });
+    mainAC.classList.add("show");
+  }
+  
+  if(mainSearch && searchBtn){
+    // Autocomplete on input
+    mainSearch.addEventListener("input", ()=>{
+      const query = mainSearch.value.trim().toLowerCase();
+      if(!query){ 
+        mainAC.classList.remove("show"); 
+        return; 
+      }
+      const matches = A.PRODUCTS.filter(p=>
+        p.name.toLowerCase().includes(query) || 
+        p.cat.toLowerCase().includes(query)
+      );
+      openMainAC(matches);
+    });
+    
+    // Search button click
+    searchBtn.addEventListener("click", ()=>{
+      mainAC.classList.remove("show");
+      const query = mainSearch.value.trim();
+      if(query){
+        els.q.value = query;
+        state.q = query;
+        render();
+        showBrowseSection();
+      } else {
+        showBrowseSection();
+      }
+    });
+    
+    // Enter key
+    mainSearch.addEventListener("keypress", (e)=>{
+      if(e.key === "Enter"){
+        searchBtn.click();
+      }
+    });
+    
+    // Close autocomplete when clicking outside
+    document.addEventListener("click", (e)=>{
+      if(!mainAC.contains(e.target) && e.target !== mainSearch){
+        mainAC.classList.remove("show");
+      }
+    });
+    
+    // Close on Escape
+    mainSearch.addEventListener("keydown", (e)=>{
+      if(e.key === "Escape"){
+        mainAC.classList.remove("show");
+      }
+    });
+  }
+
+  // Close modal when clicking outside
+  document.getElementById("quickViewModal").addEventListener("click", (e)=>{
+    if(e.target.id === "quickViewModal") e.target.classList.remove("show");
+  });
+
+  render();
+</script>
+</body>
+</html>

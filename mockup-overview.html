@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arngren Redesign - Project Overview & Mockups</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f5f5f5;
+      line-height: 1.6;
+      color: #333;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header {
+      background: linear-gradient(135deg, #1a4dd6 0%, #1f7a3a 100%);
+      color: white;
+      padding: 40px 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    header h1 { font-size: 2.5em; margin-bottom: 10px; }
+    header p { font-size: 1.1em; opacity: 0.95; }
+    
+    section {
+      background: white;
+      padding: 30px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    section h2 {
+      color: #1a4dd6;
+      font-size: 1.8em;
+      margin-bottom: 15px;
+      border-bottom: 3px solid #1f7a3a;
+      padding-bottom: 10px;
+    }
+    section h3 {
+      color: #1f7a3a;
+      font-size: 1.3em;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 15px;
+    }
+    .overview-item {
+      background: #f9f9f9;
+      padding: 15px;
+      border-left: 4px solid #1a4dd6;
+      border-radius: 4px;
+    }
+    .overview-item strong { color: #1f7a3a; }
+    
+    .mockup-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+      margin-top: 20px;
+    }
+    .mockup-frame {
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      background: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .mockup-header {
+      background: linear-gradient(135deg, #1a4dd6 0%, #1f7a3a 100%);
+      color: white;
+      padding: 15px;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+    .desktop-mockup {
+      width: 100%;
+      height: 600px;
+      border: 1px solid #ddd;
+      background: white;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .user-flow {
+      background: #f0f8ff;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 15px 0;
+      border-left: 4px solid #1a4dd6;
+    }
+    .user-flow h4 {
+      color: #1a4dd6;
+      margin-bottom: 10px;
+    }
+    .flow-step {
+      display: flex;
+      align-items: center;
+      margin: 10px 0;
+      font-weight: 600;
+    }
+    .flow-step::before {
+      content: '';
+      width: 20px;
+      height: 20px;
+      background: #1a4dd6;
+      border-radius: 50%;
+      margin-right: 15px;
+      flex-shrink: 0;
+    }
+    .flow-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1f7a3a;
+      font-weight: bold;
+      margin: 5px 0 5px 35px;
+    }
+    
+    .advantages {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 15px;
+    }
+    .advantage-box {
+      background: #f0f0f0;
+      padding: 15px;
+      border-radius: 6px;
+      border-left: 4px solid #1f7a3a;
+    }
+    .advantage-box.disadvantage {
+      border-left-color: #b45309;
+    }
+    .advantage-box h4 { margin-bottom: 8px; }
+    .advantage-box ul { padding-left: 20px; margin-top: 8px; }
+    .advantage-box li { margin-bottom: 6px; }
+    
+    .mobile-mockup {
+      max-width: 400px;
+      margin: 20px auto;
+      border: 8px solid #1a1a1a;
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    .mobile-content {
+      background: white;
+      min-height: 800px;
+      padding: 20px;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    table th, table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    table th { background: #f0f0f0; font-weight: bold; color: #1a4dd6; }
+    
+    .page-break {
+      page-break-after: always;
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 3px dashed #ccc;
+    }
+    
+    @media print {
+      body { background: white; }
+      section { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>🛍️ ARNGREN REDESIGN</h1>
+  <p>Mock-up Design Project | CS 3215 - Human Computer Interaction</p>
+  <p style="margin-top: 15px; font-size: 0.95em;">Group #6: Bacsain, Bagaporo, Ortinero, Prestado</p>
+</header>
+
+<!-- OVERVIEW SECTION -->
+<section class="page-break">
+  <h2>📋 PROJECT OVERVIEW</h2>
+  
+  <h3>1. Importance of the Chosen Application/System</h3>
+  <p>The proposed redesign of Arngren.net aims to improve usability, enhance product discoverability, and restore user trust by transforming the current cluttered interface into a structured, responsive, and user-centered e-commerce platform. By implementing this redesigned system, users will experience a more efficient and intuitive way to browse products, compare prices, and complete purchases without confusion or frustration. This improvement not only reduces cognitive overload and bounce rates but also strengthens credibility and customer confidence, ultimately increasing engagement and potential sales.</p>
+  
+  <h3>2. Problems Intended to Solve</h3>
+  <div class="overview-grid">
+    <div class="overview-item">
+      <strong>Problem 1: Cognitive Overload & Poor Navigation</strong>
+      <p>The current site displays thousands of products on a single page with no clear hierarchy, categories, or search filters, making it nearly impossible for users to find specific items quickly.</p>
+    </div>
+    <div class="overview-item">
+      <strong>Problem 2: Lack of Mobile Responsiveness</strong>
+      <p>The existing layout is static and breaks on mobile devices, forcing users to zoom in and scroll horizontally, resulting in a high bounce rate from mobile traffic.</p>
+    </div>
+    <div class="overview-item">
+      <strong>Problem 3: Inefficient & Insecure Checkout</strong>
+      <p>The current system often relies on manual order forms or direct contact methods rather than a standard, secure shopping cart and payment gateway, leading to user distrust and abandoned sales.</p>
+    </div>
+    <div class="overview-item">
+      <strong>Problem 4: No Product Comparison Tools</strong>
+      <p>Users cannot easily compare specifications between similar products (e.g., different drone models), forcing them to navigate back and forth between pages.</p>
+    </div>
+  </div>
+  
+  <h3>3. Target Users & Application Usage</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>User Type</th>
+        <th>Profile</th>
+        <th>Primary Usage Pattern</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Casual Buyers</strong></td>
+        <td>General online shoppers accustomed to modern e-commerce standards (Amazon, Shopee)</td>
+        <td>Browse categories, use search, add items to cart, checkout quickly</td>
+      </tr>
+      <tr>
+        <td><strong>Techie & Hobbyist Enthusiasts</strong></td>
+        <td>Technically adept users looking for specialized equipment (RC cars, drones, tools)</td>
+        <td>Use filters, compare specs, read detailed product descriptions, wishlist items</td>
+      </tr>
+      <tr>
+        <td><strong>Mobile Users</strong></td>
+        <td>Customers attempting to browse or purchase via smartphones</td>
+        <td>Quick searches, one-handed navigation, responsive design for smaller screens</td>
+      </tr>
+      <tr>
+        <td><strong>First-Time Visitors</strong></td>
+        <td>Users aware of "legendary" cluttered reputation but need professional interface</td>
+        <td>Explore catalog confidently, trust the platform with payment information</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <h3>4. User Experience & Expected Feelings</h3>
+  <div class="overview-grid">
+    <div class="overview-item">
+      <strong>✓ Ease of Use</strong>
+      <p>Intuitive navigation with clearly defined product categories and a prominent search bar allowing users to quickly locate items.</p>
+    </div>
+    <div class="overview-item">
+      <strong>✓ Efficiency</strong>
+      <p>Streamlined access to essential actions (Add to Cart, Checkout) through structured product cards and a distraction-free layout.</p>
+    </div>
+    <div class="overview-item">
+      <strong>✓ Reliability</strong>
+      <p>Responsive and stable platform with organized layouts, minimized errors, functional links, and optimized media handling.</p>
+    </div>
+    <div class="overview-item">
+      <strong>✓ Satisfaction</strong>
+      <p>Clean, modern, engaging shopping experience with visual clarity and trust-building design transforming browsing into an enjoyable activity.</p>
+    </div>
+  </div>
+  
+  <h3>5. Advantages vs. Existing Systems</h3>
+  <div class="advantages">
+    <div class="advantage-box">
+      <h4>✅ ADVANTAGES (Proposed Design)</h4>
+      <ul>
+        <li><strong>Improved Usability:</strong> Clean grid-based layout with clear visual hierarchy and mobile responsiveness</li>
+        <li><strong>Increased Efficiency:</strong> Quick search, filter, compare, and purchase with minimal scrolling</li>
+        <li><strong>Better Integration:</strong> Secure payment gateways (Stripe/PayPal), inventory management, analytics</li>
+        <li><strong>Product Discovery:</strong> Advanced filters by price, power type, scale, and battery specifications</li>
+        <li><strong>Trust & Credibility:</strong> Professional interface strengthens user confidence in the platform</li>
+        <li><strong>Accessibility:</strong> WCAG-compliant design supporting keyboard navigation and screen readers</li>
+      </ul>
+    </div>
+    <div class="advantage-box disadvantage">
+      <h4>⚠️ DISADVANTAGES (Proposed Design)</h4>
+      <ul>
+        <li><strong>Learning Curve:</strong> Legacy users accustomed to old layout may need adjustment time</li>
+        <li><strong>Technical Requirements:</strong> Responsive design, filtering systems, and payment integration require updated frameworks</li>
+        <li><strong>Development Cost:</strong> Rebuilding from scratch requires significant development investment</li>
+        <li><strong>Data Migration:</strong> Existing product database needs restructuring with standardized metadata</li>
+        <li><strong>Ongoing Maintenance:</strong> More complex system requires continuous updates and support</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- MOCKUP DESIGNS SECTION -->
+<section class="page-break">
+  <h2>🎨 MOCKUP DESIGNS</h2>
+  <p style="margin-bottom: 20px;">Visual representations of the redesigned interface with enhanced colors, typography, and imagery for better communication of the user experience.</p>
+  
+  <!-- MOCKUP 1: HOMEPAGE -->
+  <div class="mockup-frame">
+    <div class="mockup-header">📱 MOCKUP 1: HOMEPAGE (Welcome & Orientation)</div>
+    <div class="desktop-mockup" style="background: linear-gradient(180deg, #f7f4e8 0%, #fffdf6 100%);">
+      <div style="flex: 0 0 auto; background: linear-gradient(#fffdf6,#f5f0df); border-bottom: 1px solid #ddd; padding: 15px 20px;">
+        <div style="display: flex; gap: 20px; align-items: center;">
+          <div style="font-weight: bold; color: #1a4dd6;">🔧 ARNGREN.NET</div>
+          <div style="flex: 1;">
+            <input type="text" placeholder="Search products..." style="width: 100%; max-width: 300px; padding: 8px 12px; border: 1px solid #ddd; border-radius: 6px;">
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button style="padding: 8px 12px; background: white; border: 1px solid #ddd; border-radius: 6px; cursor: pointer;">❤️</button>
+            <button style="padding: 8px 12px; background: white; border: 1px solid #ddd; border-radius: 6px; cursor: pointer;">🛒</button>
+          </div>
+        </div>
+        <div style="display: flex; gap: 15px; margin-top: 10px; font-size: 0.9em;">
+          <a href="#" style="color: #1a4dd6; text-decoration: none;">HOME</a>
+          <a href="#" style="color: #1a4dd6; text-decoration: none;">DRONES</a>
+          <a href="#" style="color: #1a4dd6; text-decoration: none;">E-BIKES</a>
+          <a href="#" style="color: #1a4dd6; text-decoration: none;">RC TOYS</a>
+          <a href="#" style="color: #1a4dd6; text-decoration: none;">TOOLS</a>
+        </div>
+      </div>
+      <div style="flex: 1; padding: 30px 20px; display: flex; align-items: center; justify-content: center;">
+        <div style="text-align: center;">
+          <h1 style="font-size: 2.5em; color: #1a4dd6; margin-bottom: 10px;">Arngren, but readable.</h1>
+          <p style="color: #666; font-size: 1.1em; margin-bottom: 20px;">Same big catalog vibe, but organized: filters, clean product cards, and a real cart.</p>
+          <div style="display: flex; gap: 10px; justify-content: center;">
+            <button style="padding: 10px 20px; background: #1a4dd6; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">Browse Catalog →</button>
+            <button style="padding: 10px 20px; background: #1f7a3a; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">View Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- MOCKUP 2: CATALOG PAGE -->
+  <div class="mockup-frame" style="margin-top: 20px;">
+    <div class="mockup-header">📁 MOCKUP 2: CATALOG BROWSING (Category & Filter View)</div>
+    <div class="desktop-mockup" style="background: #f7f4e8; display: grid; grid-template-columns: 300px 1fr;">
+      <div style="background: white; border-right: 1px solid #ddd; padding: 20px;">
+        <h3 style="color: #1a4dd6; margin-bottom: 15px; font-size: 1.1em;">Filters</h3>
+        <div style="margin-bottom: 20px;">
+          <strong style="display: block; margin-bottom: 10px; font-size: 0.9em;">Categories</strong>
+          <label style="display: block; margin-bottom: 8px; font-size: 0.9em; cursor: pointer;">
+            <input type="radio" name="cat"> All Products
+          </label>
+          <label style="display: block; margin-bottom: 8px; font-size: 0.9em; cursor: pointer;">
+            <input type="radio" name="cat"> Drones
+          </label>
+          <label style="display: block; margin-bottom: 8px; font-size: 0.9em; cursor: pointer;">
+            <input type="radio" name="cat"> Electric Vehicles
+          </label>
+        </div>
+        <div style="margin-bottom: 20px;">
+          <strong style="display: block; margin-bottom: 10px; font-size: 0.9em;">Price Range</strong>
+          <input type="range" min="50" max="2000" style="width: 100%;">
+          <div style="font-size: 0.9em; color: #666; margin-top: 5px;">≤ $2000</div>
+        </div>
+        <div>
+          <strong style="display: block; margin-bottom: 10px; font-size: 0.9em;">Quick Filters</strong>
+          <label style="display: block; margin-bottom: 8px; font-size: 0.9em; cursor: pointer;">
+            <input type="checkbox"> In-stock only
+          </label>
+          <label style="display: block; margin-bottom: 8px; font-size: 0.9em; cursor: pointer;">
+            <input type="checkbox"> Clearance
+          </label>
+        </div>
+      </div>
+      <div style="padding: 20px;">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+          <!-- Product Card 1 -->
+          <div style="background: white; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+            <div style="height: 120px; background: linear-gradient(135deg, #1a4dd6 0%, #1f7a3a 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">🚁 DRONE</div>
+            <div style="padding: 12px;">
+              <strong style="display: block; font-size: 0.95em; margin-bottom: 5px;">Falcon Pro GPS Drone</strong>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <strong style="color: #1a4dd6;">$799</strong>
+                <span style="font-size: 0.8em; background: #1f7a3a; color: white; padding: 3px 6px; border-radius: 3px;">In Stock</span>
+              </div>
+              <div style="font-size: 0.85em; color: #666; margin-bottom: 10px;">Battery • Brushless • 4S LiPo</div>
+              <button style="width: 100%; padding: 6px; background: #1a4dd6; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.85em;">+ Add to Cart</button>
+            </div>
+          </div>
+          <!-- Product Card 2 -->
+          <div style="background: white; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+            <div style="height: 120px; background: linear-gradient(135deg, #1f7a3a 0%, #2b8a3e 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">🚴 E-BIKE</div>
+            <div style="padding: 12px;">
+              <strong style="display: block; font-size: 0.95em; margin-bottom: 5px;">VoltRide City E-Bike</strong>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <strong style="color: #1a4dd6;">$1,199</strong>
+                <span style="font-size: 0.8em; background: #1f7a3a; color: white; padding: 3px 6px; border-radius: 3px;">In Stock</span>
+              </div>
+              <div style="font-size: 0.85em; color: #666; margin-bottom: 10px;">Battery • 500W Hub • 48V</div>
+              <button style="width: 100%; padding: 6px; background: #1a4dd6; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.85em;">+ Add to Cart</button>
+            </div>
+          </div>
+          <!-- Product Card 3 -->
+          <div style="background: white; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+            <div style="height: 120px; background: linear-gradient(135deg, #b45309 0%, #d97706 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">🏎️ RC CAR</div>
+            <div style="padding: 12px;">
+              <strong style="display: block; font-size: 0.95em; margin-bottom: 5px;">RC Tank 1/16 Steel</strong>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <strong style="color: #1a4dd6;">$259</strong>
+                <span style="font-size: 0.8em; background: #d97706; color: white; padding: 3px 6px; border-radius: 3px;">Clearance</span>
+              </div>
+              <div style="font-size: 0.85em; color: #666; margin-bottom: 10px;">Battery • Brushed • NiMH</div>
+              <button style="width: 100%; padding: 6px; background: #1a4dd6; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.85em;">+ Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- MOCKUP 3: PRODUCT DETAIL PAGE -->
+  <div class="mockup-frame" style="margin-top: 20px;">
+    <div class="mockup-header">📄 MOCKUP 3: PRODUCT DETAIL (Full Specifications & Purchase)</div>
+    <div class="desktop-mockup" style="background: white; display: grid; grid-template-columns: 1fr 1fr; padding: 20px; gap: 30px;">
+      <div style="background: linear-gradient(135deg, #1a4dd6 0%, #1f7a3a 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; min-height: 400px; color: white; text-align: center;">
+        <div>
+          <div style="font-size: 4em; margin-bottom: 10px;">🚁</div>
+          <strong>Product Image</strong><br>
+          <span style="font-size: 0.9em; opacity: 0.9;">Falcon Pro GPS Drone X2</span>
+        </div>
+      </div>
+      <div>
+        <a href="#" style="color: #1a4dd6; font-size: 0.9em; text-decoration: none;">← Back to Catalog</a>
+        <h1 style="font-size: 1.8em; color: #1b1b1b; margin-bottom: 10px; margin-top: 10px;">Falcon Pro GPS Drone X2</h1>
+        <div style="display: flex; gap: 15px; margin-bottom: 15px; align-items: center;">
+          <strong style="font-size: 1.5em; color: #1a4dd6;">$799</strong>
+          <span style="background: #1f7a3a; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.9em;">✓ In Stock</span>
+        </div>
+        <p style="color: #666; margin-bottom: 15px;">GPS + stabilized camera, return-to-home.</p>
+        
+        <table style="width: 100%; margin-bottom: 20px;">
+          <tr>
+            <td style="padding: 8px 0; font-weight: bold; color: #1a4dd6; width: 40%;">Power:</td>
+            <td style="padding: 8px 0;">Battery</td>
+          </tr>
+          <tr style="background: #f9f9f9;">
+            <td style="padding: 8px 0; font-weight: bold; color: #1a4dd6;">Motor:</td>
+            <td style="padding: 8px 0;">Brushless</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; font-weight: bold; color: #1a4dd6;">Battery:</td>
+            <td style="padding: 8px 0;">4S LiPo</td>
+          </tr>
+          <tr style="background: #f9f9f9;">
+            <td style="padding: 8px 0; font-weight: bold; color: #1a4dd6;">Scale:</td>
+            <td style="padding: 8px 0;">Professional</td>
+          </tr>
+        </table>
+        
+        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+          <button style="flex: 1; padding: 12px; background: #1a4dd6; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">+ Add to Cart</button>
+          <button style="flex: 1; padding: 12px; background: white; border: 2px solid #1a4dd6; color: #1a4dd6; border-radius: 6px; cursor: pointer; font-weight: bold;">❤️ Save</button>
+        </div>
+        
+        <button style="width: 100%; padding: 12px; background: #1f7a3a; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">Proceed to Checkout</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- MOCKUP 4: SHOPPING CART PAGE -->
+  <div class="mockup-frame" style="margin-top: 20px;">
+    <div class="mockup-header">🛒 MOCKUP 4: SHOPPING CART (Items & Order Summary)</div>
+    <div class="desktop-mockup" style="background: #f7f4e8; display: grid; grid-template-columns: 1fr 350px; padding: 20px; gap: 20px;">
+      <div>
+        <h2 style="color: #1a4dd6; margin-bottom: 15px;">Cart Items</h2>
+        <!-- Cart Item 1 -->
+        <div style="background: white; border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 12px; display: grid; grid-template-columns: 100px 1fr 100px; gap: 15px;">
+          <div style="background: linear-gradient(135deg, #1a4dd6 0%, #1f7a3a 100%); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white;">🚁</div>
+          <div>
+            <strong>Falcon Pro GPS Drone X2</strong>
+            <div style="font-size: 0.9em; color: #666; margin-top: 4px;">In Stock</div>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-weight: bold; color: #1a4dd6; margin-bottom: 8px;">$799</div>
+            <div style="display: flex; gap: 4px; align-items: center; justify-content: flex-end;">
+              <button style="width: 24px; height: 24px; border: 1px solid #ddd; background: white; cursor: pointer;">−</button>
+              <span style="min-width: 20px; text-align: center;">1</span>
+              <button style="width: 24px; height: 24px; border: 1px solid #ddd; background: white; cursor: pointer;">+</button>
+            </div>
+          </div>
+        </div>
+        <!-- Cart Item 2 -->
+        <div style="background: white; border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 12px; display: grid; grid-template-columns: 100px 1fr 100px; gap: 15px;">
+          <div style="background: linear-gradient(135deg, #1f7a3a 0%, #2b8a3e 100%); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white;">🔧</div>
+          <div>
+            <strong>Precision Solder Kit Pro</strong>
+            <div style="font-size: 0.9em; color: #666; margin-top: 4px;">In Stock</div>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-weight: bold; color: #1a4dd6; margin-bottom: 8px;">$129</div>
+            <div style="display: flex; gap: 4px; align-items: center; justify-content: flex-end;">
+              <button style="width: 24px; height: 24px; border: 1px solid #ddd; background: white; cursor: pointer;">−</button>
+              <span style="min-width: 20px; text-align: center;">2</span>
+              <button style="width: 24px; height: 24px; border: 1px solid #ddd; background: white; cursor: pointer;">+</button>
+            </div>
+          </div>
+        </div>
+        <button style="width: 100%; padding: 10px; background: white; border: 1px solid #ddd; color: #1a4dd6; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px;">← Continue Shopping</button>
+      </div>
+      
+      <!-- Order Summary -->
+      <div style="background: white; border: 1px solid #ddd; border-radius: 8px; padding: 20px; height: fit-content;">
+        <h3 style="color: #1a4dd6; margin-bottom: 15px;">Order Summary</h3>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #ddd;">
+          <span style="color: #666;">Subtotal</span>
+          <strong>$1,187</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #ddd;">
+          <span style="color: #666;">Shipping</span>
+          <strong>$15</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #ddd; font-size: 1.2em;">
+          <span style="font-weight: bold;">Total</span>
+          <strong style="color: #1a4dd6;">$1,202</strong>
+        </div>
+        
+        <label style="display: block; font-size: 0.9em; margin-bottom: 8px; color: #666;">ZIP Code</label>
+        <input type="text" placeholder="Enter ZIP..." style="width: 100%; padding: 8px 12px; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 15px; font-weight: bold;">
+        
+        <button style="width: 100%; padding: 12px; background: #1a4dd6; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-bottom: 10px;">Checkout</button>
+        <button style="width: 100%; padding: 12px; background: #f0f0f0; color: #1a4dd6; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">Clear Cart</button>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- USER FLOWS SECTION -->
+<section class="page-break">
+  <h2>🔄 USER FLOWS / UX FLOWS</h2>
+  <p style="margin-bottom: 30px;">These diagrams show the complete user journey paths within the redesigned system, highlighting each step from initial interaction to completion of their goal.</p>
+  
+  <h3 style="border: none; color: #1b1b1b; margin-top: 0;">User Flow 1: Direct Search to Rapid Purchase</h3>
+  <p style="color: #666; margin-bottom: 15px;"><strong>Target User:</strong> Directed Buyer who arrives knowing exactly what they want (e.g., a specific drone model). This flow emphasizes speed and efficiency.</p>
+  
+  <div class="user-flow">
+    <h4>Flow Steps:</h4>
+    <div class="flow-step">HOMEPAGE: User lands on homepage and sees hero section with search bar</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">SEARCH ACTION: User types product name (e.g., "Falcon Pro") in search bar</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">AUTOCOMPLETE: System shows dropdown with matching products and prices</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">PRODUCT SELECTION: User clicks on their desired product from dropdown</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">PRODUCT DETAIL PAGE: User reviews technical specs, price, stock status, and images</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">ADD TO CART: User clicks "Add to Cart" button → Success toast notification appears</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">CHECKOUT: User clicks cart icon → Proceeds to shopping cart page</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">REVIEW ORDER: User reviews cart items, enters ZIP code for shipping estimate</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">PURCHASE: User clicks "Place Order" → Redirects to payment gateway (Stripe/PayPal)</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">CONFIRMATION: User receives order confirmation and thank you message</div>
+  </div>
+  
+  <h3 style="border: none; color: #1b1b1b; margin-top: 40px;">User Flow 2: Category Browsing & Technical Comparison</h3>
+  <p style="color: #666; margin-bottom: 15px;"><strong>Target User:</strong> Hobbyist/Explorer seeking to browse and compare products. This flow preserves the "treasure hunt" feel of the original site but with better organization.</p>
+  
+  <div class="user-flow">
+    <h4>Flow Steps:</h4>
+    <div class="flow-step">HOMEPAGE: User arrives at homepage with clear value proposition</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">CATEGORY SELECTION: User clicks on navigation category (e.g., "Electric Vehicles")</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">CATALOG GRID: System displays filtered grid layout of products in selected category</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">APPLY FILTERS: User uses sidebar filters to narrow results by:
+      <ul style="margin: 8px 0 0 60px; font-weight: normal;">
+        <li>• Price range (e.g., "$500 - $1000")</li>
+        <li>• Power type (Battery, Gas, Wired)</li>
+        <li>• Stock status (In-stock only)</li>
+        <li>• Clearance items</li>
+      </ul>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">QUICK VIEW: User clicks "Quick View" on multiple products to compare specs side-by-side</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">WISHLIST: User clicks ♡ button on preferred items to save for later consideration</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">DETAILED REVIEW: User clicks "Open Page" on favorite item to see full details</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">ADD & CONTINUE: User adds item to cart and continues browsing with "Continue Shopping"</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">MULTI-ITEM CART: User may add multiple items before proceeding to checkout</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">CHECKOUT FLOW: User reviews all items, applies any available discounts, and completes purchase</div>
+  </div>
+  
+  <h3 style="border: none; color: #1b1b1b; margin-top: 40px;">User Flow 3: Cart Management & Shipping Calculation</h3>
+  <p style="color: #666; margin-bottom: 15px;"><strong>Focus:</strong> Order completion phase, specifically addressing the original site's lack of transparent pricing. User arrives at cart with intention to finalize purchase.</p>
+  
+  <div class="user-flow">
+    <h4>Flow Steps:</h4>
+    <div class="flow-step">CART PAGE ACCESS: User clicks cart icon (displays item count) or navigates via "Go to Cart" button</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">REVIEW ITEMS: User views all items in cart with:
+      <ul style="margin: 8px 0 0 60px; font-weight: normal;">
+        <li>• Product name, thumbnail image</li>
+        <li>• Individual unit price → Subtotal calculation</li>
+        <li>• Stock status indicators</li>
+      </ul>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">ADJUST QUANTITIES: User uses +/− buttons to change item quantities in real-time</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">SUBTOTAL UPDATE: System recalculates subtotal dynamically as quantities change</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">SHIPPING ESTIMATOR: User enters 5-digit ZIP code into input field</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">SHIPPING COST CALC: System calculates and displays:
+      <ul style="margin: 8px 0 0 60px; font-weight: normal;">
+        <li>• Estimated shipping cost (based on location & weight)</li>
+        <li>• Free Shipping Progress Bar (e.g., "$50 more to FREE SHIPPING!")</li>
+        <li>• Delivery time estimate</li>
+      </ul>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">TOTAL CALCULATION: System displays final total (Subtotal + Shipping) with itemized breakdown</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">PROMO CODE (Optional): User may enter discount/promo code if available</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">PROCEED BUTTON: User reviews final amount and clicks "Proceed to Checkout"</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">PAYMENT GATEWAY: System redirects to secure payment processor (Stripe/PayPal)</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">PAYMENT INFO: User enters billing/shipping address and payment method</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">ORDER CONFIRMATION: User receives order number, tracking link, and confirmation email</div>
+  </div>
+  
+  <h3 style="border: none; color: #1b1b1b; margin-top: 40px;">Additional Flow: Wishlist Management</h3>
+  <p style="color: #666; margin-bottom: 15px;"><strong>Focus:</strong> Allowing users to save products for later purchase, supporting decision-making and comparison.</p>
+  
+  <div class="user-flow">
+    <h4>Flow Steps:</h4>
+    <div class="flow-step">BROWSE PRODUCTS: User is on catalog or product detail page</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">WISHLIST BUTTON: User clicks ☆ (hollow star) icon on any product card</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">SAVED FEEDBACK: Star becomes ★ (filled) and toast notification confirms: "Saved for later"</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">BADGE UPDATE: Wishlist icon in header shows number of saved items (e.g., ☆5)</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">ACCESS WISHLIST: User clicks wishlist button to view all saved products</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">WISHLIST VIEW: System displays grid of saved items with option to:
+      <ul style="margin: 8px 0 0 60px; font-weight: normal;">
+        <li>• Move item to cart</li>
+        <li>• Remove from wishlist</li>
+        <li>• View product details</li>
+      </ul>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">BULK ACTIONS: User may select multiple items and add all to cart at once</div>
+  </div>
+
+</section>
+
+<!-- KEY FEATURES SUMMARY -->
+<section>
+  <h2>✨ KEY FEATURES SUMMARY</h2>
+  
+  <h3>1. Homepage (Hero Section)</h3>
+  <ul style="margin-left: 20px;">
+    <li><strong>Value Proposition:</strong> Clear headline "Arngren, but readable" with supporting description</li>
+    <li><strong>Prominent Search Bar:</strong> Center-stage search with autocomplete suggestions</li>
+    <li><strong>Featured Categories:</strong> Quick-access links to popular categories (Drones, E-Bikes, RC Toys, Tools)</li>
+    <li><strong>Call-to-Action Buttons:</strong> "Browse Catalog" and "View Cart" for easy navigation</li>
+    <li><strong>Stats/Features Box:</strong> Highlights of improved features (search, filters, cart)</li>
+  </ul>
+  
+  <h3>2. Catalog Browsing</h3>
+  <ul style="margin-left: 20px;">
+    <li><strong>Sidebar Filters:</strong> Category, Price Range, Power Type, Stock Status, Clearance Items</li>
+    <li><strong>Grid Layout:</strong> 3-column responsive product card grid (2 columns on tablet, 1 on mobile)</li>
+    <li><strong>Product Cards:</strong> Thumbnail image, name, price, category, specs, and action buttons</li>
+    <li><strong>Sorting Options:</strong> Best Match, Price (Low-High), Price (High-Low), Newest</li>
+    <li><strong>Quick View:</strong> Modal popup for comparing specs without leaving grid</li>
+    <li><strong>Wishlist Toggle:</strong> ☆ button to save products for later</li>
+  </ul>
+  
+  <h3>3. Product Detail Page</h3>
+  <ul style="margin-left: 20px;">
+    <li><strong>Product Image:</strong> Large, zoomable product image or gallery</li>
+    <li><strong>Technical Specifications:</strong> Power Type, Motor, Battery, Scale, etc. in table format</li>
+    <li><strong>Product Description:</strong> Short and detailed description</li>
+    <li><strong>Price & Stock Status:</strong> Clear pricing and availability indicator</li>
+    <li><strong>Action Buttons:</strong> "Add to Cart", "Save to Wishlist", "Proceed to Checkout"</li>
+    <li><strong>Related Products:</strong> "Customers also bought" section</li>
+  </ul>
+  
+  <h3>4. Shopping Cart</h3>
+  <ul style="margin-left: 20px;">
+    <li><strong>Cart Items List:</strong> Item thumbnail, name, price, quantity controls</li>
+    <li><strong>Quantity Selectors:</strong> +/− buttons to adjust item counts with real-time recalculation</li>
+    <li><strong>Order Summary Sidebar:</strong> Subtotal, Shipping, Tax (if applicable), Total</li>
+    <li><strong>ZIP Code Shipping Estimator:</strong> Real-time calculation of delivery cost</li>
+    <li><strong>Free Shipping Progress Bar:</strong> Visual indicator showing "$X more for FREE shipping"</li>
+    <li><strong>Promo Code Field:</strong> Optional discount code entry</li>
+    <li><strong>Checkout Button:</strong> Proceeds to secure payment processing</li>
+  </ul>
+  
+  <h3>5. Responsive Design</h3>
+  <ul style="margin-left: 20px;">
+    <li><strong>Mobile-First Approach:</strong> Optimized for phones, tablets, and desktops</li>
+    <li><strong>Collapsible Sidebar:</strong> Filters into hamburger menu on mobile</li>
+    <li><strong>Touch-Friendly Buttons:</strong> Minimum 44px tap targets for mobile usability</li>
+    <li><strong>Readable Typography:</strong> Clear hierarchy and scalable font sizes</li>
+    <li><strong>Fast Loading:</strong> Optimized images and lazy loading for performance</li>
+  </ul>
+  
+  <h3>6. Trust & Security Features</h3>
+  <ul style="margin-left: 20px;">
+    <li><strong>Secure Checkout:</strong> Integration with Stripe/PayPal payment processors</li>
+    <li><strong>SSL Certificate:</strong> HTTPS encryption for all transactions</li>
+    <li><strong>Stock Indicators:</strong> Clear "In Stock" / "Out of Stock" / "Low Stock" labels</li>
+    <li><strong>Order Confirmation:</strong> Email receipt with order number and tracking link</li>
+    <li><strong>Return Policy:</strong> Transparent return and refund information</li>
+  </ul>
+
+</section>
+
+</div>
+</body>
+</html>

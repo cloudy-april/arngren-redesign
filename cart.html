@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Arngren Redesign — Cart</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<header class="header">
+  <div class="wrap">
+    <div class="hbar">
+      <div class="brandBox">
+        <div class="logoBox" aria-hidden="true">
+          <svg width="44" height="44" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="3" width="38" height="38" rx="11" fill="#ffffff" stroke="rgba(0,0,0,.18)"/>
+            <path d="M12 26c6-10 14-14 20-8" fill="none" stroke="#1a4dd6" stroke-width="2.8" stroke-linecap="round"/>
+            <path d="M12 26c7 3 14 2 20-8" fill="none" stroke="#1f7a3a" stroke-width="2.8" stroke-linecap="round"/>
+            <circle cx="16" cy="18" r="2.6" fill="#b45309"/>
+          </svg>
+        </div>
+        <div class="brandText">
+          <b>ARNGREN.NET</b>
+          <small>cart • checkout</small>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="index.html">HOME</a>
+        <a href="index.html#browse">CATALOG</a>
+      </nav>
+
+      <div class="actions">
+        <button class="iconbtn" id="wishBtn" title="Wishlist">☆<span class="badge" id="wishCount">0</span></button>
+        <span class="iconbtn" title="Cart">🛒<span class="badge" id="cartCount">0</span></span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="wrap" style="padding:14px 0 34px;">
+  <div class="pageCard">
+    <div class="crumbs"><a href="index.html">Home</a> › Cart</div>
+    <div style="height:12px"></div>
+
+    <div class="twoCol">
+      <div>
+        <b style="font-size:13px">Cart Items</b>
+        <div style="height:10px"></div>
+        <div id="list"></div>
+        <div class="cbtns">
+          <a class="cbtn" href="index.html#browse">Continue shopping</a>
+          <button class="cbtn" id="clearBtn">Clear cart</button>
+        </div>
+      </div>
+
+      <div class="pageCard">
+        <b style="font-size:13px">Order Summary</b>
+        <div style="height:10px"></div>
+
+        <div class="rowLine"><span style="color:var(--muted);font-weight:600;font-size:12px">Subtotal</span><b id="sub">$0</b></div>
+        <div style="height:8px"></div>
+        <div class="rowLine"><span style="color:var(--muted);font-weight:600;font-size:12px">Shipping (estimate)</span><b id="ship">$0</b></div>
+        <div style="height:8px"></div>
+        <div class="rowLine"><span style="color:var(--muted);font-weight:600;font-size:12px">Total</span><b id="tot">$0</b></div>
+
+        <div style="height:12px"></div>
+        <label style="display:block;font-size:12px;color:var(--muted);font-weight:600;margin-bottom:6px">ZIP code</label>
+        <input id="zip" style="width:100%;padding:10px;border-radius:6px;border:1px solid var(--line);font-weight:600" placeholder="Enter ZIP…"/>
+
+        <div style="height:12px"></div>
+        <button class="btn primary" style="width:100%" id="checkoutBtn">Place Order (Mock)</button>
+
+        <div style="margin-top:10px;color:var(--muted);font-weight:600;font-size:12px">
+          Prototype only. This screen shows the improved checkout experience.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="toast" id="toast">
+  <b id="toastTitle"></b>
+  <small id="toastText"></small>
+  <div class="trow">
+    <span style="font-size:12px;color:var(--muted);font-weight:500;">Next: back to home</span>
+    <a class="tbtn" href="index.html" style="text-decoration:none;color:inherit;">Home</a>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script>
+  const A = window.ArngrenApp;
+  A.syncHeaderCounts();
+
+  const list = document.getElementById("list");
+  const sub = document.getElementById("sub");
+  const ship = document.getElementById("ship");
+  const tot = document.getElementById("tot");
+  const zip = document.getElementById("zip");
+
+  document.getElementById("wishBtn").addEventListener("click", ()=>{
+    A.showToast("Wishlist", "Wishlist is stored offline. (Demo)");
+  });
+
+  const FREE_SHIP_AT = 1000;
+  function estimateShipping(zipStr, subtotal){
+    const z = (zipStr||"").trim();
+    if(!z || z.length < 4) return 0;
+    const last = Number(z[z.length-1]) || 0;
+    let base = 35 + last * 2;
+    if(subtotal >= FREE_SHIP_AT) base = 0;
+    return base;
+  }
+
+  function render(){
+    const items = A.readCartItems();
+    list.innerHTML = "";
+
+    if(!items.length){
+      list.innerHTML = `<div style="color:var(--muted);font-weight:600;font-size:12px">Cart is empty.</div>`;
+    } else {
+      for(const {p, qty} of items){
+        const row = document.createElement("div");
+        row.className = "cartItem";
+        const thumbHtml = p.img ? `<img src="${p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;" onerror="this.src='data:image/svg+xml,${encodeURIComponent(A.thumbSVG(p.kind, p.accent).replace(/"/g, "'"))}'"/>` : A.thumbSVG(p.kind, p.accent);
+        row.innerHTML = `
+          <div class="thumb">${thumbHtml}</div>
+          <div>
+            <div class="rowLine">
+              <div>
+                <b style="font-size:12px">${p.name}</b>
+                <div style="color:var(--muted);font-weight:600;font-size:12px">${p.cat} • $${p.price}</div>
+              </div>
+              <button class="cbtn" style="flex:0 0 auto" data-remove>Remove</button>
+            </div>
+
+            <div style="height:8px"></div>
+            <div class="rowLine">
+              <div class="qty">
+                <button class="qbtn" data-dec>−</button>
+                <div class="qval">${qty}</div>
+                <button class="qbtn" data-inc>+</button>
+              </div>
+              <b style="font-size:12px">$${p.price * qty}</b>
+            </div>
+          </div>
+        `;
+        row.querySelector("[data-dec]").addEventListener("click", ()=>{ A.setCartQty(p.id, qty-1); render(); });
+        row.querySelector("[data-inc]").addEventListener("click", ()=>{ A.setCartQty(p.id, qty+1); render(); });
+        row.querySelector("[data-remove]").addEventListener("click", ()=>{ A.setCartQty(p.id, 0); render(); });
+        list.appendChild(row);
+      }
+    }
+
+    let subtotal = 0;
+    for(const {p, qty} of items) subtotal += p.price * qty;
+
+    const shipping = estimateShipping(zip.value, subtotal);
+    sub.textContent = `$${subtotal}`;
+    ship.textContent = `$${shipping}`;
+    tot.textContent = `$${subtotal + shipping}`;
+
+    A.syncHeaderCounts();
+  }
+
+  zip.addEventListener("input", render);
+  document.getElementById("clearBtn").addEventListener("click", ()=>{
+    A.clearCart();
+    A.showToast("Cart cleared", "All items removed.");
+    render();
+  });
+  document.getElementById("checkoutBtn").addEventListener("click", ()=>{
+    alert("Mock order placed. (Prototype only)");
+  });
+
+  render();
+</script>
+</body>
+</html>

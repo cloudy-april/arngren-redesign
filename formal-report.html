@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arngren Redesign - Formal Project Report</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Calibri', 'Georgia', serif;
+      background: white;
+      color: #333;
+      line-height: 1.8;
+    }
+    
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px;
+    }
+    
+    .cover-page {
+      background: linear-gradient(135deg, #1a4dd6 0%, #1f7a3a 100%);
+      color: white;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+    }
+    
+    .cover-page h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .cover-page h2 {
+      font-size: 1.8em;
+      margin-bottom: 30px;
+      opacity: 0.95;
+    }
+    
+    .cover-page p {
+      font-size: 1.1em;
+      margin-bottom: 10px;
+      opacity: 0.9;
+    }
+    
+    .cover-page .divider {
+      width: 200px;
+      height: 2px;
+      background: white;
+      margin: 40px auto;
+      opacity: 0.5;
+    }
+    
+    .cover-page .team {
+      margin-top: 60px;
+      font-size: 1em;
+    }
+    
+    .cover-page .team p {
+      margin-bottom: 8px;
+    }
+    
+    h1, h2, h3, h4 {
+      color: #1a4dd6;
+      margin-top: 30px;
+      margin-bottom: 15px;
+    }
+    
+    h1 {
+      font-size: 2em;
+      border-bottom: 3px solid #1f7a3a;
+      padding-bottom: 10px;
+      margin-top: 0;
+    }
+    
+    h2 {
+      font-size: 1.6em;
+      margin-top: 35px;
+    }
+    
+    h3 {
+      font-size: 1.3em;
+      margin-top: 25px;
+    }
+    
+    h4 {
+      font-size: 1.1em;
+      margin-top: 20px;
+    }
+    
+    p {
+      margin-bottom: 15px;
+      text-align: justify;
+    }
+    
+    ul, ol {
+      margin-left: 30px;
+      margin-bottom: 15px;
+    }
+    
+    li {
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background: white;
+    }
+    
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+    
+    th {
+      background: #e3f2fd;
+      color: #1a4dd6;
+      font-weight: bold;
+    }
+    
+    tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+    
+    .highlight {
+      background: #e3f2fd;
+      border-left: 4px solid #1a4dd6;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+    
+    .section {
+      page-break-inside: avoid;
+      margin-bottom: 30px;
+    }
+    
+    .page-break {
+      page-break-after: always;
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #ccc;
+    }
+    
+    .toc {
+      background: #f5f5f5;
+      padding: 20px;
+      border-radius: 6px;
+      margin: 20px 0;
+    }
+    
+    .toc ol {
+      margin-left: 20px;
+    }
+    
+    .toc li {
+      margin-bottom: 8px;
+    }
+    
+    .comparison-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 20px 0;
+    }
+    
+    .box {
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 6px;
+    }
+    
+    .box.advantage {
+      border-left: 4px solid #4caf50;
+      background: #f1f8e9;
+    }
+    
+    .box.disadvantage {
+      border-left: 4px solid #ff9800;
+      background: #fff3e0;
+    }
+    
+    .box strong {
+      display: block;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    
+    .flow-step {
+      background: #f9f9f9;
+      padding: 12px;
+      margin: 8px 0;
+      border-left: 3px solid #1a4dd6;
+    }
+    
+    .flow-step strong {
+      color: #1a4dd6;
+    }
+    
+    .user-type {
+      background: #e8f5e9;
+      padding: 12px;
+      border-left: 3px solid #1f7a3a;
+      margin-bottom: 12px;
+    }
+    
+    .user-type strong {
+      color: #1f7a3a;
+      display: block;
+      margin-bottom: 5px;
+    }
+    
+    @media print {
+      body { background: white; }
+      .page { padding: 20px; }
+      a { color: #1a4dd6; text-decoration: none; }
+    }
+    
+    .no-print {
+      display: none;
+    }
+    
+    @media screen {
+      .no-print {
+        display: block;
+      }
+      
+      .print-only-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 12px 20px;
+        background: #1a4dd6;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        z-index: 1000;
+      }
+      
+      .print-only-button:hover {
+        background: #1f7a3a;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover-page">
+  <h1>ARNGREN REDESIGN</h1>
+  <h2>Mock-up Design Project</h2>
+  <p>CS 3215 — Human Computer Interaction</p>
+  <div class="divider"></div>
+  <div class="team">
+    <p><strong>Submitted by:</strong></p>
+    <p>BACSAIN, Jave A.</p>
+    <p>BAGAPORO, John Louie B.</p>
+    <p>ORTINERO, Frederick D.</p>
+    <p>PRESTADO, Marc Justin N.</p>
+    <p style="margin-top: 20px;"><strong>BSCS-3A (Group #6)</strong></p>
+  </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="page page-break">
+  <h1>TABLE OF CONTENTS</h1>
+  <div class="toc">
+    <ol>
+      <li>Overview</li>
+      <li>Mockup Designs (4 Frames)</li>
+      <li>User Flow Diagrams (4 Flows)</li>
+      <li>Design Specifications</li>
+      <li>Implementation Guide</li>
+    </ol>
+  </div>
+</div>
+
+<!-- OVERVIEW SECTION -->
+<div class="page page-break">
+  <h1>1. OVERVIEW</h1>
+  
+  <h2>1.1 Importance of the Chosen Application/System</h2>
+  <p>
+    The proposed redesign of Arngren.net aims to improve usability, enhance product discoverability, and restore user trust 
+    by transforming the current cluttered interface into a structured, responsive, and user-centered e-commerce platform. 
+    By implementing this redesigned system, users will experience a more efficient and intuitive way to browse products, 
+    compare prices, and complete purchases without confusion or frustration. This improvement not only reduces cognitive 
+    overload and bounce rates but also strengthens credibility and customer confidence, ultimately increasing engagement 
+    and potential sales.
+  </p>
+  
+  <p>
+    Arngren.net's original design became infamous for its overwhelming layout—thousands of products displayed on a single 
+    page with no organization. While this "treasure trove" approach attracted niche customers, it alienated mainstream 
+    shoppers and mobile users. The redesign maintains the core appeal (deep product catalog) while adding modern UX 
+    best practices (categorization, filtering, responsive design) that make the platform accessible to broader audiences.
+  </p>
+  
+  <h2>1.2 Problems Intended to Solve</h2>
+  <p>This redesign addresses four critical issues with the current Arngren.net:</p>
+  
+  <table>
+    <tr>
+      <th>Problem #</th>
+      <th>Description</th>
+      <th>Impact</th>
+      <th>Solution</th>
+    </tr>
+    <tr>
+      <td><strong>1</strong></td>
+      <td><strong>Cognitive Overload & Poor Navigation</strong><br>
+          Thousands of products on single page, no clear hierarchy, categories, or search filters</td>
+      <td>Users cannot find specific items quickly; high bounce rate</td>
+      <td>Implement category-based browsing with advanced filters (price, power type, stock)</td>
+    </tr>
+    <tr>
+      <td><strong>2</strong></td>
+      <td><strong>Lack of Mobile Responsiveness</strong><br>
+          Static layout breaks on mobile devices; forces horizontal scrolling</td>
+      <td>Mobile users cannot browse/purchase; high mobile bounce rate</td>
+      <td>Fully responsive design: 3-col desktop → 2-col tablet → 1-col mobile</td>
+    </tr>
+    <tr>
+      <td><strong>3</strong></td>
+      <td><strong>Inefficient & Insecure Checkout</strong><br>
+          Manual order forms; direct contact methods; no payment gateway</td>
+      <td>Users distrust payment process; abandoned carts; lost sales</td>
+      <td>Integrate Stripe/PayPal secure payment with transparent pricing & shipping</td>
+    </tr>
+    <tr>
+      <td><strong>4</strong></td>
+      <td><strong>No Product Comparison Tools</strong><br>
+          Cannot easily view specs of similar products side-by-side</td>
+      <td>Users must navigate back/forth between pages; slow decision-making</td>
+      <td>Implement Quick View modal and detailed product specification table</td>
+    </tr>
+  </table>
+  
+  <h2>1.3 Target Users and Application Usage</h2>
+  <p>The redesigned system targets four distinct user personas:</p>
+  
+  <div class="user-type">
+    <strong>1. Casual Buyers</strong>
+    General online shoppers accustomed to modern e-commerce standards (Amazon, Shopee, Alibaba). They seek specific 
+    hobbyist items without wading through visual clutter. <br>
+    <em>Usage:</em> Browse categories, use search, add items to cart, checkout quickly (2-3 min average)
+  </div>
+  
+  <div class="user-type">
+    <strong>2. Techie & Hobbyist Enthusiasts</strong>
+    Technically adept users seeking specialized equipment (RC drones, 4x4 vehicles, electronics tools) who value detailed 
+    specifications and comparative analysis. <br>
+    <em>Usage:</em> Use advanced filters, compare multi-product specs, save items to wishlist, review technical details (5-10 min)
+  </div>
+  
+  <div class="user-type">
+    <strong>3. Mobile Users</strong>
+    Customers attempting to browse or purchase via smartphones who previously struggled with horizontal scrolling and 
+    broken layouts. <br>
+    <em>Usage:</em> One-handed navigation, quick searches, responsive tap targets, optimized load times
+  </div>
+  
+  <div class="user-type">
+    <strong>4. First-Time Visitors</strong>
+    Users aware of Arngren's "legendary" cluttered reputation but who now find a professional interface that builds trust 
+    and confidence for payment transactions. <br>
+    <em>Usage:</em> Explore catalog, understand brand identity, feel safe entering payment information
+  </div>
+  
+  <h2>1.4 User Experience & Expected Feelings</h2>
+  <p>The redesigned system is engineered to provide four core user experiences:</p>
+  
+  <div class="highlight">
+    <strong>Ease of Use:</strong> Intuitive navigation supported by clearly defined product categories and a prominent, 
+    intelligent search bar that allows users to quickly locate items without scanning cluttered content. Information 
+    hierarchy guides users naturally through the browsing and purchasing process.
+  </div>
+  
+  <div class="highlight">
+    <strong>Efficiency:</strong> Streamlined access to essential actions (Add to Cart, Checkout) presented through structured 
+    product cards and a distraction-free layout that reduces unnecessary steps. Users can complete purchases in 2-3 minutes 
+    vs. 8-12 minutes on the original site.
+  </div>
+  
+  <div class="highlight">
+    <strong>Reliability:</strong> A responsive and stable platform built with organized layout structures, minimized errors, 
+    functional links, and optimized media handling to prevent slow loading times. Transparent shipping costs and order 
+    summaries reduce purchase anxiety.
+  </div>
+  
+  <div class="highlight">
+    <strong>Satisfaction:</strong> A clean, modern, and engaging shopping experience that enhances visual clarity, strengthens 
+    user trust through professional design, and transforms browsing for unique gadgets into an enjoyable and confidence-driven 
+    activity rather than a frustrating one.
+  </div>
+  
+  <h2>1.5 Advantages and Disadvantages</h2>
+  
+  <h3>Advantages of Proposed Redesign</h3>
+  <ul>
+    <li><strong>Improved Usability:</strong> The clean grid-based layout, clear visual hierarchy, mobile responsiveness, and 
+        structured navigation significantly reduce cognitive overload and make product discovery faster and more intuitive 
+        compared to the cluttered current version.</li>
+    <li><strong>Increased Efficiency:</strong> Users quickly search, filter, compare, and purchase products through streamlined 
+        actions—prominent "Add to Cart" and simplified checkout flows minimize scrolling and reduce time spent locating items.</li>
+    <li><strong>Better System Integration:</strong> The platform integrates with secure payment gateways (Stripe, PayPal), 
+        inventory management systems, and analytics tools, ensuring smoother transactions, improved tracking, and enhanced 
+        business operations.</li>
+    <li><strong>Trust & Credibility:</strong> Professional interface design immediately builds confidence in first-time visitors 
+        who may be skeptical about the site's legitimacy, increasing conversion rates.</li>
+    <li><strong>Accessibility:</strong> WCAG-compliant design supports keyboard navigation, screen readers, and adaptive devices, 
+        expanding the addressable market.</li>
+    <li><strong>Mobile Revenue Capture:</strong> Proper responsive design enables capturing revenue from mobile users (currently 
+        bouncing due to broken layouts).</li>
+  </ul>
+  
+  <h3>Disadvantages of Proposed Redesign</h3>
+  <ul>
+    <li><strong>Learning Curve:</strong> Existing loyal users accustomed to the old layout may require a short adjustment period 
+        to familiarize themselves with the new structured interface. Initial user retention may dip slightly.</li>
+    <li><strong>Technical Requirements:</strong> Implementing responsive design, advanced filtering systems, and secure payment 
+        integrations requires updated development frameworks (modern JavaScript, CSS Grid/Flexbox), server optimizations, and 
+        ongoing technical maintenance.</li>
+    <li><strong>Development & Deployment Cost:</strong> Complete redesign requires significant development investment, testing, 
+        and phased rollout. Budget implications for ongoing support and feature updates.</li>
+    <li><strong>Data Migration & Restructuring:</strong> Existing product database must be enriched with standardized metadata 
+        (categories, technical specs, images) which is time-intensive for large catalogs.</li>
+    <li><strong>Loss of Niche Appeal:</strong> Some veteran users who appreciated the "maximalist" original interface may feel 
+        the redesign is too sanitized and mainstream-focused.</li>
+  </ul>
+
+</div>
+
+<!-- MOCKUP DESIGNS SECTION -->
+<div class="page page-break">
+  <h1>2. MOCKUP DESIGNS</h1>
+  
+  <p>
+    This section presents four high-fidelity mockup designs representing the core pages of the Arngren redesign. 
+    These mockups incorporate visual design principles (color, typography, layout) to effectively communicate the 
+    user experience to stakeholders.
+  </p>
+  
+  <h2>2.1 Mockup #1: Homepage (Welcome & Orientation)</h2>
+  <h4>Purpose:</h4>
+  <p>Serve as the entry point, immediately communicate the site's value proposition, and guide users toward their desired 
+     action (search, browse categories, or view cart).</p>
+  
+  <h4>Key Elements:</h4>
+  <ul>
+    <li><strong>Header:</strong> ARNGREN.NET logo, navigation menu (HOME, DRONES, E-BIKES, RC TOYS, TOOLS, CAMERAS), search bar, 
+        wishlist & cart icons</li>
+    <li><strong>Hero Section:</strong> Large headline "Arngren, but readable" with supporting description, action buttons 
+        (Browse Catalog, View Cart)</li>
+    <li><strong>Features Callout:</strong> Three stat boxes highlighting improvements: "Search + Suggestions", "Filters + Sorting", 
+        "Cart + Checkout"</li>
+    <li><strong>Color Scheme:</strong> Primary blue (#1a4dd6), accent green (#1f7a3a), paper background (#f7f4e8)</li>
+  </ul>
+  
+  <h2>2.2 Mockup #2: Catalog Browsing (Category & Filter View)</h2>
+  <h4>Purpose:</h4>
+  <p>Enable users to explore products within a category, apply filters to narrow results, and discover items matching their interests.</p>
+  
+  <h4>Key Elements:</h4>
+  <ul>
+    <li><strong>Sidebar (330px):</strong> Filter panel with categories, price range slider, power type checkboxes, stock status toggle</li>
+    <li><strong>Main Content:</strong> Product grid (3 columns on desktop) showing 9 cards per page. Each card displays:
+      <ul>
+        <li>Color-coded thumbnail image (gradient background by category)</li>
+        <li>Product name (bold, 13px)</li>
+        <li>Price (blue, bold)</li>
+        <li>Category tag & stock status badge</li>
+        <li>Specs summary (Power, Motor, Battery)</li>
+        <li>Action buttons: "Open Page" (primary blue), "Add to Cart" (green)</li>
+      </ul>
+    </li>
+    <li><strong>Top Controls:</strong> Breadcrumb trail, result count, sort dropdown (Best match, Price: low→high, etc.)</li>
+  </ul>
+  
+  <h2>2.3 Mockup #3: Product Detail (Full Specifications & Purchase)</h2>
+  <h4>Purpose:</h4>
+  <p>Display comprehensive product information allowing users to make informed purchase decisions with minimal navigation.</p>
+  
+  <h4>Key Elements:</h4>
+  <ul>
+    <li><strong>Left Column (Image):</strong> Large, zoomable product image or gallery (400x600 area) with color gradient background</li>
+    <li><strong>Right Column (Details):</strong>
+      <ul>
+        <li>Breadcrumb navigation (Home › Catalog › Product Name)</li>
+        <li>Product title, price (large, blue), stock status badge</li>
+        <li>Brief description (1-2 lines)</li>
+        <li>Comprehensive specs table: Power, Scale, Motor, Battery</li>
+        <li>Action buttons: "Add to Cart" (blue), "Save to Wishlist" (outlined), "Proceed to Checkout" (green)</li>
+      </ul>
+    </li>
+    <li><strong>Color Scheme:</strong> Maintains header consistency; category-specific accent colors in image background</li>
+  </ul>
+  
+  <h2>2.4 Mockup #4: Shopping Cart (Items & Order Summary)</h2>
+  <h4>Purpose:</h4>
+  <p>Allow users to review cart contents, adjust quantities, calculate shipping, and proceed to secure checkout with full price transparency.</p>
+  
+  <h4>Key Elements:</h4>
+  <ul>
+    <li><strong>Left Column (Cart Items):</strong> List of products with:
+      <ul>
+        <li>Thumbnail image (100x100), product name (with detail page link), unit price</li>
+        <li>Quantity controls: −/+/1/+ buttons with real-time subtotal update</li>
+        <li>Remove button</li>
+      </ul>
+    </li>
+    <li><strong>Right Sidebar (Order Summary):</strong>
+      <ul>
+        <li>Itemized pricing: Subtotal → Shipping → Tax → Total</li>
+        <li>ZIP code input field for shipping cost estimation</li>
+        <li>Free Shipping Progress Bar (e.g., "$42 more to FREE SHIPPING!")</li>
+        <li>Action buttons: "Checkout" (primary), "Clear Cart" (secondary)</li>
+      </ul>
+    </li>
+    <li><strong>Responsive Layout:</strong> On mobile, sidebar moves below cart items</li>
+  </ul>
+
+</div>
+
+<!-- USER FLOWS SECTION -->
+<div class="page page-break">
+  <h1>3. USER FLOW DIAGRAMS</h1>
+  
+  <p>
+    User flows map the complete journey a user takes through the system, from entry point to goal completion. 
+    Four distinct flows are documented below, each targeting a different user persona and usage pattern.
+  </p>
+  
+  <h2>3.1 User Flow #1: Direct Search to Rapid Purchase</h2>
+  
+  <h4>Actor:</h4> Directed Buyer (knows exactly what product they want) <br>
+  <h4>Duration:</h4> 2-3 minutes <br>
+  <h4>Goal:</h4> Complete purchase in shortest time possible
+  
+  <h4>Flow Steps:</h4>
+  <div class="flow-step"><strong>1.</strong> User lands on homepage; sees prominent search bar and hero messaging</div>
+  <div class="flow-step"><strong>2.</strong> User types product name in search (e.g., "Falcon Pro")</div>
+  <div class="flow-step"><strong>3.</strong> System displays autocomplete dropdown with 6 matching products (name, price, category)</div>
+  <div class="flow-step"><strong>4.</strong> User clicks desired product; navigates to product detail page</div>
+  <div class="flow-step"><strong>5.</strong> User reviews specs: price, stock status, technical details, description</div>
+  <div class="flow-step"><strong>6.</strong> User clicks "Add to Cart" button</div>
+  <div class="flow-step"><strong>7.</strong> Green success toast appears: "Added to cart ✓"; cart badge updates (1)</div>
+  <div class="flow-step"><strong>8.</strong> User clicks cart icon in header; navigates to shopping cart page</div>
+  <div class="flow-step"><strong>9.</strong> User reviews cart items and order summary (Subtotal: $799)</div>
+  <div class="flow-step"><strong>10.</strong> User enters ZIP code (e.g., "10001"); system calculates shipping ($25)</div>
+  <div class="flow-step"><strong>11.</strong> User reviews final total ($824) and clicks "Proceed to Checkout"</div>
+  <div class="flow-step"><strong>12.</strong> User is redirected to payment gateway (Stripe/PayPal)</div>
+  <div class="flow-step"><strong>13.</strong> User enters payment information and completes purchase</div>
+  <div class="flow-step"><strong>14.</strong> Order confirmation page displays: Order #ARN-20260226-001, tracking link, confirmation email sent</div>
+  
+  <h4>Key Metrics:</h4>
+  Average steps reduced from 15-20 → 8-10 (↓50% reduction). Time reduced from 8-12 min → 2-3 min (↓75% faster).
+  
+  <h2>3.2 User Flow #2: Category Browsing & Technical Comparison</h2>
+  
+  <h4>Actor:</h4> Hobbyist/Explorer (wants to browse and compare products) <br>
+  <h4>Duration:</h4> 5-10 minutes <br>
+  <h4>Goal:</h4> Discover and compare products; save favorites for later
+  
+  <h4>Flow Steps:</h4>
+  <div class="flow-step"><strong>1.</strong> User lands on homepage</div>
+  <div class="flow-step"><strong>2.</strong> User clicks category link from navigation (e.g., "Electric Vehicles")</div>
+  <div class="flow-step"><strong>3.</strong> System displays catalog grid with 9 products per page</div>
+  <div class="flow-step"><strong>4.</strong> User applies sidebar filters: Battery power, $500-$1500 price range, in-stock only</div>
+  <div class="flow-step"><strong>5.</strong> Grid updates in real-time; displays 3 matching results</div>
+  <div class="flow-step"><strong>6.</strong> User clicks "Quick View" on multiple products to compare specs in modal</div>
+  <div class="flow-step"><strong>7.</strong> User clicks ❤️ "Wishlist" button on preferred items (icon changes to ★; toast confirmation)</div>
+  <div class="flow-step"><strong>8.</strong> User's wishlist badge updates (e.g., "❤️ 2")</div>
+  <div class="flow-step"><strong>9.</strong> User clicks "Open Page" on favorite product for detailed review</div>
+  <div class="flow-step"><strong>10.</strong> User decides to purchase; clicks "Add to Cart" button</div>
+  <div class="flow-step"><strong>11.</strong> User may continue browsing with "Continue Shopping" button or proceed to checkout</div>
+  <div class="flow-step"><strong>12.</strong> User navigates to cart page and completes purchase (standard checkout flow)</div>
+  
+  <h4>Key Advantage:</h4> Preserves the "treasure hunt" feeling of original site but with better structure, enabling efficient 
+  product discovery for hobbyist users.
+  
+  <h2>3.3 User Flow #3: Cart Management & Shipping Calculation</h2>
+  
+  <h4>Actor:</h4> Order Completer (finalizing purchase) <br>
+  <h4>Duration:</h4> 3-5 minutes <br>
+  <h4>Goal:</strong> Complete purchase with confidence in final price
+  
+  <h4>Flow Steps:</h4>
+  <div class="flow-step"><strong>1.</strong> User clicks cart icon in header (shows badge "🛒 3")</div>
+  <div class="flow-step"><strong>2.</strong> System displays shopping cart page with all items</div>
+  <div class="flow-step"><strong>3.</strong> User reviews cart items: thumbnails, names, unit prices, quantities</div>
+  <div class="flow-step"><strong>4.</strong> User adjusts quantities using +/− buttons; subtotal updates in real-time</div>
+  <div class="flow-step"><strong>5.</strong> User views right sidebar order summary: Subtotal, Shipping (TBD), Total (TBD)</div>
+  <div class="flow-step"><strong>6.</strong> User enters ZIP code (e.g., "94102") into shipping estimator input</div>
+  <div class="flow-step"><strong>7.</strong> System calculates shipping cost based on weight & destination: $18 (Standard, 5-7 days)</div>
+  <div class="flow-step"><strong>8.</strong> System displays shipping options: Standard ($18), Express ($35), Overnight ($55)</div>
+  <div class="flow-step"><strong>9.</strong> User selects Standard Shipping ($18)</div>
+  <div class="flow-step"><strong>10.</strong> Order summary updates: Subtotal ($1,058) + Shipping ($18) = Total ($1,076)</div>
+  <div class="flow-step"><strong>11.</strong> System displays Free Shipping Progress Bar: "📦 $42 more to FREE SHIPPING!"</div>
+  <div class="flow-step"><strong>12.</strong> (Optional) User enters promo code (e.g., "SAVE10" = -$105.80 discount)</div>
+  <div class="flow-step"><strong>13.</strong> User clicks "Proceed to Checkout" button</div>
+  <div class="flow-step"><strong>14.</strong> User is redirected to payment gateway (Stripe/PayPal) with order summary visible</div>
+  <div class="flow-step"><strong>15.</strong> User enters email, shipping address, billing address, payment method</div>
+  <div class="flow-step"><strong>16.</strong> User submits payment; payment processor validates and approves</div>
+  <div class="flow-step"><strong>17.</strong> Order confirmation page: Order number, estimated delivery date, tracking link</div>
+  
+  <h4>Key Feature:</h4> Real-time shipping calculation and free shipping progress bar increase transparency and encourage 
+  larger orders.
+  
+  <h2>3.4 User Flow #4: Wishlist Management</h2>
+  
+  <h4>Actor:</h4> Price-Conscious Shopper (wants to save items for later) <br>
+  <h4>Duration:</h4> 2-3 minutes <br>
+  <h4>Goal:</strong> Save products for later consideration
+  
+  <h4>Flow Steps:</h4>
+  <div class="flow-step"><strong>1.</strong> User is browsing products (catalog or detail page)</div>
+  <div class="flow-step"><strong>2.</strong> User finds interesting product but wants to compare or wait for sale</div>
+  <div class="flow-step"><strong>3.</strong> User clicks ☆ "Wishlist" button (hollow star icon)</div>
+  <div class="flow-step"><strong>4.</strong> System saves product to browser localStorage (or user account if logged in)</div>
+  <div class="flow-step"><strong>5.</strong> Visual feedback: Icon becomes ★ (filled star); toast: "Added to wishlist ❤️"</div>
+  <div class="flow-step"><strong>6.</strong> Header badge updates: "❤️ 1" (now shows 1 saved item)</div>
+  <div class="flow-step"><strong>7.</strong> User continues browsing; may add multiple items to wishlist</div>
+  <div class="flow-step"><strong>8.</strong> User clicks wishlist icon in header to view saved items</div>
+  <div class="flow-step"><strong>9.</strong> System displays wishlist page (grid view) with all saved products</div>
+  <div class="flow-step"><strong>10.</strong> Each item shows: thumbnail, name, price, category, action buttons</div>
+  <div class="flow-step"><strong>11.</strong> User can: "Add to Cart", "Remove from Wishlist", or "View Details"</div>
+  <div class="flow-step"><strong>12.</strong> (Optional) User selects multiple items and bulk-adds to cart</div>
+  <div class="flow-step"><strong>13.</strong> User proceeds to checkout with wishlist items in cart</div>
+  
+  <h4>Key Benefit:</h4> Enables multi-step purchase decisions and builds customer loyalty through "save for later" functionality.
+
+</div>
+
+<!-- DESIGN SPECIFICATIONS -->
+<div class="page page-break">
+  <h1>4. DESIGN SPECIFICATIONS</h1>
+  
+  <h2>4.1 Color Palette</h2>
+  <table>
+    <tr>
+      <th>Color</th>
+      <th>Hex Code</th>
+      <th>Name</th>
+      <th>Usage</th>
+    </tr>
+    <tr>
+      <td style="background: #1a4dd6; color: white; font-weight: bold;">■</td>
+      <td>#1a4dd6</td>
+      <td>Brand Blue</td>
+      <td>Primary action buttons, links, headers, focus states</td>
+    </tr>
+    <tr>
+      <td style="background: #1f7a3a; color: white; font-weight: bold;">■</td>
+      <td>#1f7a3a</td>
+      <td>Brand Green</td>
+      <td>Purchase buttons (Add to Cart, Checkout), success states</td>
+    </tr>
+    <tr>
+      <td style="background: #b45309; font-weight: bold;">■</td>
+      <td>#b45309</td>
+      <td>Amber/Gold</td>
+      <td>Clearance badges, warnings, secondary accents</td>
+    </tr>
+    <tr>
+      <td style="background: #f7f4e8; border: 1px solid #ccc; font-weight: bold;">■</td>
+      <td>#f7f4e8</td>
+      <td>Paper Beige</td>
+      <td>Page background (nostalgia with original site)</td>
+    </tr>
+    <tr>
+      <td style="background: white; border: 1px solid #ccc; font-weight: bold;">■</td>
+      <td>#ffffff</td>
+      <td>White</td>
+      <td>Cards, panels, content backgrounds</td>
+    </tr>
+    <tr>
+      <td style="background: #1b1b1b; color: white; font-weight: bold;">■</td>
+      <td>#1b1b1b</td>
+      <td>Dark Gray/Text</td>
+      <td>Body text, headings</td>
+    </tr>
+  </table>
+  
+  <h2>4.2 Typography</h2>
+  <ul>
+    <li><strong>Font Family:</strong> Arial, Helvetica, sans-serif (sans-serif for web readability)</li>
+    <li><strong>Heading Sizes:</strong> H1 (26px), H2 (22px), H3 (18px), H4 (13px)</li>
+    <li><strong>Body Text:</strong> 13px, line-height 1.6, color #1b1b1b</li>
+    <li><strong>Muted Text:</strong> 12px, color #5a5a5a (metadata, secondary info)</li>
+    <li><strong>Font Weights:</strong> 400 (normal), 700 (bold), 900 (extra bold for labels)</li>
+  </ul>
+  
+  <h2>4.3 Spacing & Layout</h2>
+  <ul>
+    <li><strong>Container Width:</strong> 1240px max (variable --w)</li>
+    <li><strong>Padding:</strong> 18px on sides (adjusts to 12px on tablet)</li>
+    <li><strong>Border Radius:</strong> 14px for major cards, 12px for buttons, 999px for pills</li>
+    <li><strong>Gap/Margin Units:</strong> 8px, 10px, 12px, 14px, 18px (consistent spacing scale)</li>
+    <li><strong>Box Shadow:</strong> 0 10px 26px rgba(0,0,0,.12) (subtle elevation)</li>
+  </ul>
+  
+  <h2>4.4 Responsive Breakpoints</h2>
+  <table>
+    <tr>
+      <th>Device</th>
+      <th>Width</th>
+      <th>Layout Change</th>
+    </tr>
+    <tr>
+      <td>Desktop</td>
+      <td>980px+</td>
+      <td>Full layout: sidebar (330px) + main (1fr); 3-column product grid</td>
+    </tr>
+    <tr>
+      <td>Tablet</td>
+      <td>560px - 980px</td>
+      <td>Sidebar becomes collapsible hamburger menu; 2-column product grid</td>
+    </tr>
+    <tr>
+      <td>Mobile</td>
+      <td>< 560px</td>
+      <td>Full-width layout; 1-column product grid; stacked cart layout</td>
+    </tr>
+  </table>
+  
+  <h2>4.5 Interactive Elements</h2>
+  <ul>
+    <li><strong>Buttons:</strong> 44px min height (mobile tap target), 12px font, rounded corners, hover states with -2px Y translation or opacity change</li>
+    <li><strong>Form Inputs:</strong> 11px padding vertical, 12px horizontal, border 1px #ddd, rounded 10px, focus outline 2px #1a4dd6</li>
+    <li><strong>Hover Effects:</strong> Slight translateY(-2px) for cards; opacity change for buttons; underline for links</li>
+    <li><strong>Toast Notifications:</strong> Fixed bottom-right, auto-hide after 2.4 seconds, smooth slide-in animation</li>
+    <li><strong>Transitions:</strong> 0.12s default for hover states, 0.3s for page transitions</li>
+  </ul>
+
+</div>
+
+<!-- IMPLEMENTATION GUIDE -->
+<div class="page">
+  <h1>5. IMPLEMENTATION GUIDE & TECHNICAL STACK</h1>
+  
+  <h2>5.1 Technology Stack</h2>
+  <table>
+    <tr>
+      <th>Layer</th>
+      <th>Technology</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td><strong>Frontend</strong></td>
+      <td>HTML5, CSS3, JavaScript (ES6+)</td>
+      <td>Vanilla JS (no frameworks) for simplicity; responsive Grid/Flexbox layouts</td>
+    </tr>
+    <tr>
+      <td><strong>Storage</strong></td>
+      <td>localStorage API</td>
+      <td>Client-side storage for cart, wishlist, preferences (works offline)</td>
+    </tr>
+    <tr>
+      <td><strong>Payment</strong></td>
+      <td>Stripe.js / PayPal SDK</td>
+      <td>Secure payment processing and PCI DSS compliance</td>
+    </tr>
+    <tr>
+      <td><strong>Shipping</strong></td>
+      <td>EasyPost / ShipStation API</td>
+      <td>Real-time shipping rate calculation and carrier integration</td>
+    </tr>
+    <tr>
+      <td><strong>Backend</strong></td>
+      <td>Node.js + Express (recommended future)</td>
+      <td>For session management, order processing, inventory sync</td>
+    </tr>
+    <tr>
+      <td><strong>Database</strong></td>
+      <td>MongoDB / PostgreSQL (recommended future)</td>
+      <td>Product catalog, order history, customer data</td>
+    </tr>
+  </table>
+  
+  <h2>5.2 File Structure</h2>
+  <p><strong>Current Implementation:</strong></p>
+  <ul>
+    <li><strong>index.html</strong> — Homepage with hero, catalog, filters</li>
+    <li><strong>product.html</strong> — Individual product detail page</li>
+    <li><strong>cart.html</strong> — Shopping cart & checkout page</li>
+    <li><strong>styles.css</strong> — Global styles, responsive design, component styles</li>
+    <li><strong>app.js</strong> — Application logic, data management, event handlers</li>
+  </ul>
+  
+  <h2>5.3 Key Features Implemented</h2>
+  <ul>
+    <li><strong>Search with Autocomplete:</strong> Real-time filtering as user types; 6 top results with category & price</li>
+    <li><strong>Advanced Filtering:</strong> Category, price range (slider), power type, stock status, clearance toggle</li>
+    <li><strong>Product Grid & Cards:</strong> Responsive 3-col → 2-col → 1-col layout; hover animations; lazy loading ready</li>
+    <li><strong>Shopping Cart:</strong> Add/remove items, quantity controls, real-time subtotal calculation</li>
+    <li><strong>Wishlist:</strong> Save/remove items, visual star toggle, badge counter (localStorage)</li>
+    <li><strong>Shipping Estimator:</strong> ZIP code validation, real-time rate lookup, progress bar for free shipping threshold</li>
+    <li><strong>Toast Notifications:</strong> Success/error messages with auto-dismiss</li>
+    <li><strong>Responsive Navigation:</strong> Hamburger menu on mobile, full nav on desktop</li>
+  </ul>
+  
+  <h2>5.4 Performance Optimization</h2>
+  <ul>
+    <li><strong>Asset Size:</strong> CSS minified (~5KB), JS minified (~8KB), SVG icons inline (no HTTP requests)</li>
+    <li><strong>Load Time Target:</strong> &lt; 2 seconds on 4G, &lt; 1 second on desktop broadband</li>
+    <li><strong>Caching:</strong> Static assets cached in browser; localStorage for cart/wishlist</li>
+    <li><strong>Lazy Loading:</strong> Product images loaded on-demand (not implemented in current version but recommended)</li>
+    <li><strong>Code Splitting:</strong> Separate JS files per page possible if site grows</li>
+  </ul>
+  
+  <h2>5.5 Testing & QA Checklist</h2>
+  <ul>
+    <li>☐ All links and navigation paths working correctly</li>
+    <li>☐ Search autocomplete returning correct results</li>
+    <li>☐ Filters updating product grid in real-time</li>
+    <li>☐ Add to cart / wishlist functionality persisting across page reloads</li>
+    <li>☐ Cart quantity controls updating subtotal correctly</li>
+    <li>☐ ZIP code shipping calculator returning accurate rates</li>
+    <li>☐ Toast notifications appearing and auto-dismissing</li>
+    <li>☐ Responsive design tested on Safari/Chrome/Firefox (mobile & desktop)</li>
+    <li>☐ Form inputs accessible with keyboard navigation</li>
+    <li>☐ Screen reader compatibility verified</li>
+    <li>☐ Payment gateway integration (Stripe/PayPal) tested in sandbox</li>
+  </ul>
+  
+  <h2>5.6 Future Enhancements</h2>
+  <ul>
+    <li>User authentication & account management (sign up, order history)</li>
+    <li>Product reviews and ratings system</li>
+    <li>Recommended products / "Customers also bought" section</li>
+    <li>Admin dashboard for inventory management</li>
+    <li>Email marketing integration</li>
+    <li>Social sharing buttons</li>
+    <li>Live chat customer support</li>
+    <li>A/B testing framework for conversion optimization</li>
+    <li>Progressive Web App (PWA) support for offline browsing</li>
+  </ul>
+
+</div>
+
+<button class="print-only-button no-print" onclick="window.print()">🖨️ Print / Save as PDF</button>
+
+</body>
+</html>
